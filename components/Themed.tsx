@@ -12,7 +12,7 @@ import {
 
 import Colors from "../constants/Colors";
 
-type ThemeProps = {
+export type ThemeProps = {
   lightColor?: string;
   darkColor?: string;
 };
@@ -55,10 +55,13 @@ export function View(props: ViewProps) {
 export function TextInput(props: TextInputProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
-
+  const backgroundColor = useThemeColor(
+    { light: lightColor, dark: darkColor },
+    "background"
+  );
   return (
     <DefaultTextInput
-      style={[{ color, borderColor: darkColor }, style]}
+      style={[{ color, borderColor: darkColor, backgroundColor }, style]}
       {...otherProps}
     />
   );

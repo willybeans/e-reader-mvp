@@ -4,11 +4,16 @@ import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import { Button } from "../../components/Button";
 import { Link } from "expo-router";
+import { useEffect, useState } from "react";
+
+type Content = string[];
 
 export default function TabTwoScreen() {
-  const buttonPress = () => {
-    console.log("press");
-  };
+  const [contentList, setContentList] = useState<Content | undefined>();
+  useEffect(() => {
+    //api call here for setContentList
+  });
+  const buttonPress = () => {};
   return (
     <View style={styles.container}>
       <Text style={styles.title}>You have no contents</Text>
@@ -17,12 +22,14 @@ export default function TabTwoScreen() {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <Link href="/upload" asChild>
-        <Pressable>
-          <Text>Click Here to start making content!</Text>
-        </Pressable>
-        {/* <Button title="or click here" /> */}
-      </Link>
+      {contentList === undefined && (
+        <Link href="/upload" asChild>
+          <Pressable>
+            <Text>Click Here to start making content!</Text>
+          </Pressable>
+          {/* <Button title="or click here" /> */}
+        </Link>
+      )}
     </View>
   );
 }

@@ -1,11 +1,18 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, Platform, StyleSheet, ScrollView } from "react-native";
-import { SetStateAction, useState } from "react";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+} from "react-native";
+import { SetStateAction, useEffect, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 
 import { Text, View, TextInput } from "../components/Themed";
 import { Button } from "../components/Button";
 import { api, ReqBody } from "../helpers/api";
+import { Link, router } from "expo-router";
 
 type Asset = {
   test?: any;
@@ -21,6 +28,15 @@ export default function UploadScreen() {
 
   const [text, setText] = useState<string>("");
 
+  const displayModal = (text: string) => {
+    router.push({
+      pathname: "/newContentModal",
+      params: {
+        content: text,
+      },
+    });
+  };
+
   const onLinkSubmit = async () => {
     let websiteText: { message: string } = await api(
       `http://localhost:8080/scrape`
@@ -29,7 +45,6 @@ export default function UploadScreen() {
   };
 
   const onSubmit = async () => {
-    setText("...");
     const { test, uri, name, type } = asset;
     let formData = new FormData();
     let newBlob: Blob = new Blob([
@@ -57,10 +72,10 @@ export default function UploadScreen() {
       } as ReqBody
     );
     setText(imageData.message);
+    displayModal(imageData.message);
   };
 
   const pickImage = async () => {
-    console.log("test");
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -69,16 +84,11 @@ export default function UploadScreen() {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
 
       // ImagePicker saves the taken photo to disk and returns a local URI to it
       let localUri = result.assets[0].uri;
-      let test = result.assets[0].base64;
-      console.log("test", test);
-
       let filename = localUri.split("/").pop() as string;
 
       // Infer the type of the image
@@ -88,10 +98,6 @@ export default function UploadScreen() {
       // Upload the image using the fetch and FormData APIs
       // Assume "photo" is the name of the form field the server expects
       setAsset({
-        // uri: new Blob([localUri], {
-        //   type: "text/plain",
-        // }),
-        test: test,
         uri: localUri,
         name: filename,
         type,
@@ -115,7 +121,7 @@ export default function UploadScreen() {
               style={{ height: "100%", width: "100%" }}
             />
           </View>
-          <Button title="submit" onPress={onSubmit} />
+          <Button onPress={onSubmit} />
         </View>
 
         <View
@@ -124,7 +130,7 @@ export default function UploadScreen() {
           darkColor="rgba(255,255,255,0.1)"
         />
         <Text style={styles.title}>Text From Image</Text>
-        <Button title="Pick Image From Camera Roll" onPress={pickImage} />
+        <Button title="Upload Image" onPress={pickImage} />
 
         {/* Use a light status bar on iOS to account for the black space above the modal */}
         <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
@@ -137,8 +143,6 @@ export default function UploadScreen() {
             <Button title="Submit" onPress={onSubmit} />
           </>
         )}
-
-        {text && <Text>{text}</Text>}
       </View>
     </ScrollView>
   );

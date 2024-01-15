@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Pressable, View } from "react-native";
 import { ThemeProps, useThemeColor, Text } from "./Themed";
+import Colors from "../constants/Colors";
 
 type Button = {
   onPress?: () => void;
@@ -13,8 +14,8 @@ type Button = {
 export type ButtonProps = ThemeProps & Button;
 
 export function Button({
-  darkColor = "#484848",
-  lightColor = "#B4B4B4",
+  darkColor = Colors.dark.buttonDefault,
+  lightColor = Colors.light.buttonDefault,
   title = "Submit",
   onPress,
 }: ButtonProps) {

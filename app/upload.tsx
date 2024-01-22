@@ -6,13 +6,14 @@ import {
   ScrollView,
   Pressable,
 } from "react-native";
-import { SetStateAction, useEffect, useState } from "react";
+import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 
 import { Text, View, TextInput } from "../components/Themed";
 import { Button } from "../components/Button";
-import { api, ReqBody } from "../helpers/api";
+import { api, buildUrl, getLocalType, ReqBody } from "../helpers/api";
 import { Link, router } from "expo-router";
+import { storeData } from "../helpers/localStorage";
 
 type Asset = {
   test?: any;
@@ -28,20 +29,23 @@ export default function UploadScreen() {
 
   const [text, setText] = useState<string>("");
 
-  const displayModal = (text: string) => {
+  const displayModal = (webText: string) => {
+    console.log("testing'", webText);
+    storeData("newContent", webText); // local storage
     router.push({
       pathname: "/newContentModal",
-      params: {
-        content: text,
-      },
+      // params: {
+      //   content: JSON.stringify({ webText }),
+      // },
     });
   };
 
   const onLinkSubmit = async () => {
-    let websiteText: { message: string } = await api(
-      `http://localhost:8080/scrape`
+    let websiteText: { body: string; heading: string } = await api(
+      `${buildUrl()}/scrape?url=${link}`
     );
-    setText(websiteText.message);
+    const cleanSlash = websiteText.body.replace("\\n|\\/gm", " ");
+    displayModal(websiteText.body);
   };
 
   const onSubmit = async () => {

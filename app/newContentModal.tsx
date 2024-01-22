@@ -2,21 +2,30 @@ import { StatusBar } from "expo-status-bar";
 import { Platform, StyleSheet, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 
-import { Text, TextInput, View } from "../components/Themed";
+import { Text, View } from "../components/Themed";
 import { Button } from "../components/Button";
 import EditTextContent from "../components/EditTextContent";
 import ReadTextContent from "../components/ReadTextContent";
 
-import { useLocalSearchParams } from "expo-router";
+// import { useLocalSearchParams } from "expo-router";
+import { getDataString } from "../helpers/localStorage";
 
 export default function NewContentScreen() {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
-  const params = useLocalSearchParams<{ content: string }>();
-  const { content } = params;
+  // const params = useLocalSearchParams<{ content: string }>();
+  // const { content } = params;
+
   useEffect(() => {
-    setText(content);
+    (async function () {
+      let storedContent = await getDataString("newContent");
+
+      if (typeof storedContent === "string") {
+        setText(storedContent);
+      }
+    })();
   }, []);
+
   return (
     <ScrollView>
       <View style={styles.container}>

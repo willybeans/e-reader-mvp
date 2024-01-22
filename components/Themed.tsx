@@ -61,7 +61,17 @@ export function TextInput(props: TextInputProps) {
   );
   return (
     <DefaultTextInput
-      style={[{ color, borderColor: darkColor, backgroundColor }, style]}
+      style={[
+        {
+          color,
+          borderColor: darkColor,
+          backgroundColor,
+          padding: 4,
+          borderRadius: 10,
+          borderWidth: 2,
+        },
+        style,
+      ]}
       {...otherProps}
     />
   );

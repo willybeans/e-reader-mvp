@@ -27,10 +27,7 @@ export default function UploadScreen() {
   const [asset, setAsset] = useState<Asset>({} as Asset);
   const [link, setLink] = useState<string>("");
 
-  const [text, setText] = useState<string>("");
-
   const displayModal = (webText: string) => {
-    console.log("testing'", webText);
     storeData("newContent", webText); // local storage
     router.push({
       pathname: "/newContentModal",
@@ -49,15 +46,9 @@ export default function UploadScreen() {
   };
 
   const onSubmit = async () => {
-    const { test, uri, name, type } = asset;
+    const { uri, name, type } = asset;
     let formData = new FormData();
-    let newBlob: Blob = new Blob([
-      JSON.stringify({
-        name,
-        uri,
-        type,
-      }),
-    ]);
+
     formData.append("image", {
       name,
       uri,
@@ -65,17 +56,14 @@ export default function UploadScreen() {
     } as any);
     formData.append("languages", "deu");
 
-    let imageData: { message: string } = await api(
-      "http://localhost:8080/image",
-      {
-        method: "POST",
-        body: formData,
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      } as ReqBody
-    );
-    setText(imageData.message);
+    let imageData: { message: string } = await api(`${buildUrl()}/image`, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    } as ReqBody);
+    // setText(imageData.message);
     displayModal(imageData.message);
   };
 
@@ -121,11 +109,14 @@ export default function UploadScreen() {
           >
             <TextInput
               onChangeText={setLink}
-              placeholder="testt"
-              style={{ height: "100%", width: "100%" }}
+              placeholder="Your URL Here"
+              style={{
+                height: "100%",
+                width: "100%",
+              }}
             />
           </View>
-          <Button onPress={onSubmit} />
+          <Button onPress={onLinkSubmit} />
         </View>
 
         <View
@@ -163,7 +154,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     alignContent: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   title: {
     fontSize: 20,
@@ -171,7 +162,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 30,
-    width: "50%",
+    flex: 1,
     borderBlockColor: "fff",
   },
   separator: {

@@ -12,13 +12,15 @@ type Props = {
 
 export default function ReadTextContent(props: Props) {
   const [text, setText] = useState<string[]>([]);
-  // const [headingText, setHeadingText] = useState<string>("");
   const [page, setPage] = useState<number>(0);
+  // const [headingText, setHeadingText] = useState<string>("");
+
   const pan = Gesture.Pan().onStart((event) => {
     if (event.velocityX > 0) {
       if (page === 0) return;
       setPage(page - 1);
     } else {
+      if (page >= text.length - 1) return;
       setPage(page + 1);
     }
   });
@@ -44,7 +46,11 @@ export default function ReadTextContent(props: Props) {
   return (
     <GestureDetector gesture={pan}>
       <View>
-        <CountBanner page={page} onPress={pagePress} />
+        <CountBanner
+          page={page}
+          totalPages={text?.length}
+          onPress={pagePress}
+        />
         <View style={styles.container}>
           {/* {headingText && <Text>{headingText}</Text>} */}
           <Text style={styles.readerText}>{text[page]}</Text>

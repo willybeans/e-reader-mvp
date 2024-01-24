@@ -1,12 +1,12 @@
 import React from "react";
-import { StyleSheet, Pressable, View } from "react-native";
+import { StyleSheet, Pressable, View, StyleProp } from "react-native";
 import { ThemeProps, useThemeColor, Text } from "./Themed";
 import Colors from "../constants/Colors";
 
 type Button = {
   onPress?: () => void;
   title?: string;
-  style?: any; // fix
+  style?: StyleProp<any>;
   lightColor?: string;
   darkColor?: string;
 };
@@ -18,16 +18,14 @@ export function Button({
   lightColor = Colors.light.buttonDefault,
   title = "Submit",
   onPress,
+  style,
 }: ButtonProps) {
-  // const { onPress, title = "Submit" } = props;
-  // const { style, ...otherProps } = props;
-
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     "background"
   );
   return (
-    <View style={[{ backgroundColor }, styles.button]}>
+    <View style={[{ backgroundColor }, styles.button, style]}>
       <Pressable onPress={onPress}>
         <Text style={styles.text}>{title}</Text>
       </Pressable>

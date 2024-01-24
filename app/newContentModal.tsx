@@ -36,13 +36,18 @@ export default function NewContentScreen() {
           <Button
             title={`toggle ${isEdit ? "read" : "edit"}`}
             onPress={() => setIsEdit(!isEdit)}
+            style={{ width: "50%" }}
           />
           {isEdit && text ? (
             <EditTextContent updateContent={setText} content={text} />
           ) : (
             <ReadTextContent content={text} />
           )}
-          <Button title="save content" onPress={() => setIsEdit(!isEdit)} />
+          <Button
+            title="save content"
+            onPress={() => setIsEdit(!isEdit)}
+            style={{ width: "50%" }}
+          />
         </View>
 
         <View
@@ -68,6 +73,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     width: "100%",
+    alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
   },

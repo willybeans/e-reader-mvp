@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import { Text, View, TextInput } from "./Themed";
+import { Dimensions, StyleSheet } from "react-native";
+import { Text, View } from "./Themed";
+import { cleanString, createPagination } from "../helpers/utils";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { CountBanner } from "./CountBanner";
 
 type Props = {
   content?: string;
@@ -8,27 +11,56 @@ type Props = {
 };
 
 export default function ReadTextContent(props: Props) {
-  const [text, setText] = useState<string>("");
+  const [text, setText] = useState<string[]>([]);
   // const [headingText, setHeadingText] = useState<string>("");
+  const [page, setPage] = useState<number>(0);
+  const pan = Gesture.Pan().onStart((event) => {
+    if (event.velocityX > 0) {
+      if (page === 0) return;
+      setPage(page - 1);
+    } else {
+      setPage(page + 1);
+    }
+  });
 
   useEffect(() => {
-    if (props?.content) setText(props.content);
-    // if (props?.heading) setHeadingText(props.heading);
+    if (props?.content) {
+      const windowHeight = Dimensions.get("window").height;
+      const cleaned = cleanString(props.content); // broken?
+      const paginated = createPagination(Math.floor(windowHeight / 2), cleaned);
+      setText(paginated);
+    }
   }, [props]);
 
+  const pagePress = (type: string) => {
+    if (type === "up") {
+      setPage(page + 1);
+    } else {
+      if (page === 0) return;
+      setPage(page - 1);
+    }
+  };
+
   return (
-    <View>
-      <View style={styles.container}>
-        {/* {headingText && <Text>{headingText}</Text>} */}
-        <Text>{text}</Text>
+    <GestureDetector gesture={pan}>
+      <View>
+        <CountBanner page={page} onPress={pagePress} />
+        <View style={styles.container}>
+          {/* {headingText && <Text>{headingText}</Text>} */}
+          <Text style={styles.readerText}>{text[page]}</Text>
+        </View>
       </View>
-    </View>
+    </GestureDetector>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginHorizontal: 50,
+    marginHorizontal: 20,
+  },
+  readerText: {
+    fontSize: 20,
+    lineHeight: 35,
   },
 });

@@ -41,7 +41,6 @@ export default function UploadScreen() {
     let websiteText: { body: string; heading: string } = await api(
       `${buildUrl()}/scrape?url=${link}`
     );
-    const cleanSlash = websiteText.body.replace("\\n|\\/gm", " ");
     displayModal(websiteText.body);
   };
 

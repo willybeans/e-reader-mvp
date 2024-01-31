@@ -5,24 +5,43 @@ import { Text, View } from "../../components/Themed";
 import { Button } from "../../components/Button";
 import { Link } from "expo-router";
 import { useEffect, useState } from "react";
+import { api, buildUrl } from "../../helpers/api";
+import { ContentIcon } from "../../components/ContentIcon";
 
-type Content = string[];
+export type Content = {
+  id: number;
+  author_id: number;
+  body_content: string;
+  title: string;
+  time_created: string;
+};
+
+type ContentList = Content[];
 
 export default function TabTwoScreen() {
-  const [contentList, setContentList] = useState<Content | undefined>();
+  const [contentList, setContentList] = useState<Content[] | undefined>();
   useEffect(() => {
     //api call here for setContentList
-  });
-  const buttonPress = () => {};
+    (async function () {
+      // need a user state object
+      const usersContent: Content[] = await api(
+        `${buildUrl()}/getAllContent?id=${3}`
+      );
+
+      setContentList(usersContent);
+    })();
+  }, []);
+
+  const onPress = () => {
+    console.log("test");
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>You have no contents</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      {contentList === undefined && (
+      {contentList?.map((c, i) => (
+        <ContentIcon onPress={onPress} content={c} key={i} />
+      ))}
+      {contentList?.length === 0 && (
         <Link href="/upload" asChild>
           <Pressable>
             <Text>Click Here to start making content!</Text>
@@ -36,9 +55,19 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: "row",
+    // flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
+  },
+  contentContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: "100%",
+    width: "100%",
+    marginLeft: 10,
+    marginRight: 10,
   },
   title: {
     fontSize: 20,

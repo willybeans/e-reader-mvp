@@ -28,8 +28,12 @@ export default function ReadTextContent(props: Props) {
   useEffect(() => {
     if (props?.content) {
       const windowHeight = Dimensions.get("window").height;
+
       const cleaned = cleanString(props.content); // broken?
-      const paginated = createPagination(Math.floor(windowHeight / 2), cleaned);
+      const paginated = createPagination(
+        Math.floor(windowHeight / 2.5),
+        cleaned
+      );
       setText(paginated);
     }
   }, [props]);
@@ -67,6 +71,6 @@ const styles = StyleSheet.create({
   },
   readerText: {
     fontSize: 20,
-    lineHeight: 35,
+    lineHeight: 35, // allow this to be adjustable?
   },
 });

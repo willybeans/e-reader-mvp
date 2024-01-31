@@ -33,21 +33,24 @@ export default function NewContentScreen() {
           Please confirm the text and edit it before saving
         </Text>
         <View style={styles.rowWrap}>
-          <Button
-            title={`toggle ${isEdit ? "read" : "edit"}`}
-            onPress={() => setIsEdit(!isEdit)}
-            style={{ width: "50%" }}
-          />
+          <View>
+            <Button
+              title="save content"
+              onPress={() => setIsEdit(!isEdit)}
+              style={{ width: "50%" }}
+            />
+            <Button
+              title={`toggle ${isEdit ? "read" : "edit"}`}
+              onPress={() => setIsEdit(!isEdit)}
+              style={{ width: "50%" }}
+            />
+          </View>
+
           {isEdit && text ? (
             <EditTextContent updateContent={setText} content={text} />
           ) : (
             <ReadTextContent content={text} />
           )}
-          <Button
-            title="save content"
-            onPress={() => setIsEdit(!isEdit)}
-            style={{ width: "50%" }}
-          />
         </View>
 
         <View

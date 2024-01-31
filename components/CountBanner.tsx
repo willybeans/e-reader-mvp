@@ -6,16 +6,17 @@ import { FontAwesome } from "@expo/vector-icons";
 
 type CountBannerProps = {
   onPress: (type: string) => void;
-  page: number;
+  page?: number;
   totalPages?: number;
 };
 
-export function CountBanner({ page, totalPages, onPress }: CountBannerProps) {
+export function CountBanner(props: CountBannerProps) {
+  const { page, totalPages, onPress } = props;
   const colorScheme = useColorScheme();
 
   return (
     <View style={styles.banner}>
-      {page > 0 && (
+      {page !== undefined && page > 0 && (
         <FontAwesome
           name="arrow-left"
           size={25}
@@ -23,15 +24,17 @@ export function CountBanner({ page, totalPages, onPress }: CountBannerProps) {
           onPress={() => onPress("down")}
         />
       )}
-      <Text style={styles.counter}>{page + 1}</Text>
-      {totalPages && page < totalPages - 1 && (
-        <FontAwesome
-          name="arrow-right"
-          size={25}
-          color={Colors[colorScheme ?? "light"].text}
-          onPress={() => onPress("up")}
-        />
-      )}
+      {page !== undefined && <Text style={styles.counter}>{page}</Text>}
+      {totalPages !== undefined &&
+        page !== undefined &&
+        page < totalPages - 1 && (
+          <FontAwesome
+            name="arrow-right"
+            size={25}
+            color={Colors[colorScheme ?? "light"].text}
+            onPress={() => onPress("up")}
+          />
+        )}
     </View>
   );
 }

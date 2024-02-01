@@ -58,6 +58,11 @@ function RootLayoutNav() {
           name="newContentModal"
           options={{ presentation: "modal" }}
         />
+        <Stack.Screen
+          name="read"
+          // good for a login page
+          // options={{ presentation: "fullScreenModal" }}
+        />
       </Stack>
     </ThemeProvider>
   );

@@ -7,22 +7,26 @@ import { Content } from "../app/(tabs)/two";
 import { Link } from "expo-router";
 
 type CountBannerProps = {
-  onPress: (type: string) => void;
+  onPress?: (type: string) => void;
   content?: Content;
 };
 
 export function ContentIcon(props: CountBannerProps) {
-  // console.log("userconteont111 ", props.content);
-
   const colorScheme = useColorScheme();
 
   return (
     <View style={styles.container}>
-      <Link href="/modal" asChild>
+      <Link
+        href={{
+          pathname: "/read",
+          params: { id: props?.content?.id as number },
+        }}
+        asChild
+      >
         <Pressable
           onPress={() => {
             // setTimesPressed(current => current + 1);
-            console.log("test");
+            console.log("can use this for pressed state");
           }}
           style={({ pressed }) => [
             {

@@ -33,7 +33,7 @@ export function Button({
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     justifyContent: "center",

@@ -24,12 +24,11 @@ export default function TabLayout() {
           let iconName: React.ComponentProps<typeof FontAwesome>["name"] =
             "code";
           switch (route.name) {
-            case "chats":
-              // iconName = "home";
-              iconName = "wechat";
-              break;
-            case "learn":
+            case "index":
               iconName = "pencil";
+              break;
+            case "chats":
+              iconName = "wechat";
               break;
             case "explore":
               iconName = "globe";
@@ -54,9 +53,9 @@ export default function TabLayout() {
       })}
     >
       <Tabs.Screen
-        name="chats"
+        name="index"
         options={{
-          title: "Chats",
+          title: "Learn",
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -74,11 +73,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="learn"
+        name="chats"
         options={{
-          title: "Learn",
+          title: "Chats",
         }}
       />
+
       <Tabs.Screen
         name="explore"
         options={{

@@ -4,7 +4,7 @@ import { Text, View, TextInput } from "./Themed";
 
 type Props = {
   content?: string;
-  updateContent: Dispatch<SetStateAction<string>>;
+  updateContent: Dispatch<SetStateAction<string>> | (([string]: any) => void);
 };
 
 export default function EditTextContent(props: Props) {

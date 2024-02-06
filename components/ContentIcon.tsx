@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, useColorScheme } from "react-native";
 import { Text, View } from "./Themed";
 import Colors from "../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-import { Content } from "../app/(tabs)/two";
+import { Content } from "../app/(tabs)/learn";
 import { Link } from "expo-router";
 
 type CountBannerProps = {

@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, useColorScheme } from "react-native";
 import { Text, View } from "./Themed";
 import Colors from "../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-import { Content } from "../app/(tabs)/two";
+import { Content } from "../app/(tabs)";
 import { Link } from "expo-router";
 
 type CountBannerProps = {
@@ -18,8 +18,8 @@ export function ContentIcon(props: CountBannerProps) {
     <View style={styles.container}>
       <Link
         href={{
-          pathname: "/read",
-          params: { id: props?.content?.id as number },
+          pathname: `/reader/${props?.content?.id}`,
+          params: { id: props?.content?.id as string },
         }}
         asChild
       >

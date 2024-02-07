@@ -1,9 +1,9 @@
 import { Platform } from "react-native";
 
 export type ReqBody = {
-  method: "POST" | "GET";
+  method: "GET" | "POST" | "PUT" | "DELETE";
   body: any;
-  headers: {
+  headers?: {
     [key: string]: string;
   };
 };

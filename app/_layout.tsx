@@ -55,11 +55,16 @@ function RootLayoutNav() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
         <Stack.Screen
-          name="newContentModal"
-          options={{ presentation: "modal" }}
+          name="newContentScreen"
+          // options={{ presentation: "modal" }}
         />
         <Stack.Screen
-          name="read"
+          name="reader/index"
+          // good for a login page
+          // options={{ presentation: "fullScreenModal" }}
+        />
+        <Stack.Screen
+          name="reader/[id]"
           // good for a login page
           // options={{ presentation: "fullScreenModal" }}
         />

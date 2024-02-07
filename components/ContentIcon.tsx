@@ -18,7 +18,7 @@ export function ContentIcon(props: CountBannerProps) {
     <View style={styles.container}>
       <Link
         href={{
-          pathname: "/read",
+          pathname: `/reader/${props?.content?.id}`,
           params: { id: props?.content?.id as string },
         }}
         asChild

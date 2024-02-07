@@ -26,8 +26,6 @@ export default function ProfileScreen() {
     {} as UserProfile
   );
   const profileText = useRef("");
-  // const [profile, setProfile] = useState<string>("");
-
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const colorScheme = useColorScheme();

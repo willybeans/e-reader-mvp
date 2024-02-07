@@ -1,15 +1,15 @@
 import { Platform, StyleSheet } from "react-native";
 
-import { Text, View } from "../components/Themed";
+import { Text, View } from "../../components/Themed";
 import { useLocalSearchParams } from "expo-router";
 
 export default function ReadScreen() {
   const params = useLocalSearchParams();
   const { id } = params;
-  console.log("read page ", id);
+  console.log("test page ", id);
   return (
     <View style={styles.container}>
-      <Text>read page</Text>
+      <Text>reader page: {id}</Text>
     </View>
   );
 }

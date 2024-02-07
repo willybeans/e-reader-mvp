@@ -30,7 +30,7 @@ export default function UploadScreen() {
   const displayModal = (webText: string) => {
     storeData("newContent", webText); // local storage
     router.push({
-      pathname: "/newContentModal",
+      pathname: "/newContentScreen",
       // params: {
       //   content: JSON.stringify({ webText }),
       // },

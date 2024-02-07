@@ -1,4 +1,9 @@
-import { Pressable, StyleSheet, useColorScheme } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
 import { Text, View } from "../../components/Themed";
 import { Link, router } from "expo-router";
 import { useEffect, useState } from "react";
@@ -31,20 +36,12 @@ export default function LearnScreen() {
     })();
   }, []);
 
-  const onPressContent = (id: string) => {
-    console.log("redirect to content! maybe redundant");
-    // router.push({
-    //   pathname: `/learn/${id}`,
-    // });
-  };
-
   const onPressUpload = () => {
     router.push({
       pathname: "/upload",
     });
   };
 
-  console.log("test: ", contentList);
   return contentList.length === 0 ? (
     <View style={styles.emptyContainer}>
       <Text style={{ marginBottom: 10, fontSize: 20 }}>
@@ -58,29 +55,39 @@ export default function LearnScreen() {
     </View>
   ) : (
     <View style={styles.container}>
-      {contentList?.length !== 0 && (
-        <Link href="/upload" asChild>
-          <Pressable>
-            <Text>Add Content</Text>
-            <FontAwesome
-              name="plus"
-              size={25}
-              color={Colors[colorScheme ?? "light"].text}
-              // style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-            />
-          </Pressable>
-        </Link>
-      )}
-      {contentList?.map((c, i) => (
-        <ContentIcon onPress={onPressContent} content={c} key={i} />
-      ))}
+      <Link href="/upload" asChild>
+        <Pressable style={{ alignItems: "center" }}>
+          <Text>Add Content</Text>
+          <FontAwesome
+            name="plus"
+            size={25}
+            color={Colors[colorScheme ?? "light"].text}
+            // style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+          />
+        </Pressable>
+      </Link>
+      <ScrollView style={{ width: "100%", height: "100%" }}>
+        <View>
+          <Text>Your Saved Content</Text>
+          <View
+            style={styles.separator}
+            lightColor="#eee"
+            darkColor="rgba(255,255,255,0.1)"
+          />
+        </View>
+        <View style={styles.contentContainer}>
+          {contentList?.map((c, i) => (
+            <ContentIcon content={c} key={i} />
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "column",
     // flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
@@ -109,8 +116,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   separator: {
-    marginVertical: 30,
+    marginVertical: 5,
     height: 1,
-    width: "80%",
+    width: "100%",
   },
 });

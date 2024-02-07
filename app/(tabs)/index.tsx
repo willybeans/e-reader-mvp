@@ -29,7 +29,7 @@ export default function LearnScreen() {
     (async function () {
       // need a user state object
       const usersContent: Content[] = await api(
-        `${buildUrl()}/getAllContent?id=${"d2792a62-86a4-4c49-a909-b1e762c683a3"}`
+        `${buildUrl()}/getAllUserContent?id=${"d2792a62-86a4-4c49-a909-b1e762c683a3"}`
       );
 
       setContentList(usersContent);

@@ -1,5 +1,5 @@
 export const cleanString = (str: string): string => {
-  const cleanSlash = str.replace("\\n|\\/gm", " ");
+  const cleanSlash = str.replace("\\n|\\/gm", "meow");
   return cleanSlash;
 };
 

@@ -8,6 +8,7 @@ export interface Message {
 
 export interface ChatRoom {
   id: string;
+  name: string;
   usernames: string[];
   messages: Message[];
 }

@@ -1,4 +1,4 @@
 import { ChatProvider } from "./Provider";
-import useWebSocketContext from "./useChatContext";
+import useChatContext from "./useChatContext";
 
-export { ChatProvider, useWebSocketContext };
+export { ChatProvider, useChatContext };

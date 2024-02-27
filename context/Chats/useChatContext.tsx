@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import Context from "./Context";
 
-const useWebSocketContext = () => {
-  const webSocketContext = useContext(Context);
-  return webSocketContext;
+const useChatContext = () => {
+  const chatContext = useContext(Context);
+  return chatContext;
 };
 
-export default useWebSocketContext;
+export default useChatContext;

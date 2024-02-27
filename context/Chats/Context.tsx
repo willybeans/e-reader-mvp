@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import { Websocket } from "./types";
+import { ChatContext } from "./types";
 
-const Context = createContext<Websocket>({} as Websocket);
+const Context = createContext<ChatContext>({} as ChatContext);
 
 export default Context;

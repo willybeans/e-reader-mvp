@@ -27,7 +27,7 @@ export interface Message {
   user_id: string;
   content: string;
   sent_at: string;
-  sender_username?: string;
+  username?: string;
 }
 
 export interface ChatRoom {

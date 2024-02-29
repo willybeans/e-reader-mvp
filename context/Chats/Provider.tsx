@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Context from "./Context";
-import { Message, ChatRoom, ChatContext } from "./types";
-
-type Action = {
-  type: string;
-  content: any;
-};
+import { Action, ActionTypes, Message, ChatRoom, ChatContext } from "./types";
 
 function reducer(state: ChatRoom[], action: Action) {
+  console.log("action fired in reducer", action.type);
+  console.log("typeof action fired", typeof action.content);
+
   switch (action.type) {
     case "get_messages": {
       return [...state];
     }
     case "post_message": {
       // findIndex = state.indexOf(action.content.id)
-      return [...state, action.content];
+      // ...action.content
+      return [...state, ...action.content];
     }
+    default:
+      throw Error("Unknown action: " + action.type);
   }
-  throw Error("Unknown action: " + action.type);
 }
 
 const initialState: ChatRoom[] = [];
@@ -40,10 +40,10 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
   //     content: message
   //   });
   // }
-
-  const handleReducer = (action: string, content: ChatRoom[] | Message) => {
+  //ChatRoom[] | Message
+  const handleReducer = (actionType: ActionTypes, content: any) => {
     dispatch({
-      type: action,
+      type: actionType,
       content: content,
     });
   };

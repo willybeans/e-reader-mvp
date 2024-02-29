@@ -53,7 +53,7 @@ export default () => {
             chatState[chatIndex]?.chat_messages?.map((m, i) => (
               <View key={i}>
                 <View>
-                  <Text>{m.sender_username}</Text>
+                  <Text>{m.username}</Text>
                   <Text>{m.content}</Text>
                 </View>
               </View>

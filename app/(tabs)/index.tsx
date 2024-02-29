@@ -12,7 +12,6 @@ import { ContentIcon } from "../../components/ContentIcon";
 import { FontAwesome } from "@expo/vector-icons";
 import Colors from "../../constants/Colors";
 import { Button } from "../../components/Button";
-import { useWebSocketContext } from "../../context/WebSocket";
 
 export type Content = {
   id: string;
@@ -25,7 +24,6 @@ export type Content = {
 export default function LearnScreen() {
   const [contentList, setContentList] = useState<Content[]>([]);
   const colorScheme = useColorScheme();
-  const { isReady, val, send } = useWebSocketContext();
 
   useEffect(() => {
     (async function () {
@@ -37,12 +35,6 @@ export default function LearnScreen() {
       setContentList(usersContent);
     })();
   }, []);
-
-  useEffect(() => {
-    if (isReady) {
-      send("test message");
-    }
-  }, [isReady, send]);
 
   const onPressUpload = () => {
     router.push({
@@ -63,9 +55,6 @@ export default function LearnScreen() {
     </View>
   ) : (
     <View style={styles.container}>
-      <Text>
-        Ready: {JSON.stringify(isReady)}, Value: {val}
-      </Text>
       <Link href="/upload" asChild>
         <Pressable style={{ alignItems: "center" }}>
           <Text>Add Content</Text>

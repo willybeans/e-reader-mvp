@@ -1,8 +1,22 @@
 import { Stack } from "expo-router";
 import { Header } from "../../../components/Header";
 import { ChatProvider } from "../../../context/Chats";
+import { useLocalSearchParams } from "expo-router";
+import { useWebSocketContext } from "../../../context/WebSocket";
+import { useEffect, useState } from "react";
 
 export default function ChatsLayout() {
+  const { chatState } = useWebSocketContext();
+  const params = useLocalSearchParams();
+  const { id } = params;
+  const [chatName, setChatName] = useState<string>("");
+
+  useEffect(() => {
+    setChatName(
+      chatState[chatState.findIndex((x) => x.chat_room_id === id)]?.chat_name
+    );
+  }, [id]);
+
   return (
     <ChatProvider>
       <Stack
@@ -17,11 +31,11 @@ export default function ChatsLayout() {
           tabBarStyle: { backgroundColor: "black" },
         })}
       >
-        <Stack.Screen name="index" options={{ headerTitle: "Your Chats" }} />
+        <Stack.Screen name="index" options={{ headerTitle: "Chats" }} />
         <Stack.Screen
           name="[id]"
-          // pass in users name
-          options={{ headerTitle: (props) => <Header {...props} /> }}
+          options={{ headerTitle: chatName }}
+          // options={{ headerTitle: (props) => <Header {...props} /> }}
         />
       </Stack>
     </ChatProvider>

@@ -76,6 +76,7 @@ export default function TabLayout() {
         name="chats"
         options={{
           title: "Chats",
+          headerShown: false,
         }}
       />
 

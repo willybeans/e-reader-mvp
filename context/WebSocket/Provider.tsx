@@ -19,8 +19,8 @@ function reducer(state: ChatRoom[], action: Action): ChatRoom[] {
         (x) => x.chat_room_id === action.content.chat_room_id
       );
       const stateCopy = [...state];
-      stateCopy[indexOfChat]?.chat_messages?.push(action.content);
-      return [...state, ...stateCopy];
+      stateCopy[indexOfChat]?.chat_messages?.unshift(action.content);
+      return [...stateCopy];
     }
     default:
       throw Error("Unknown action: " + action.type);

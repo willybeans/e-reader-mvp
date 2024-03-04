@@ -27,13 +27,13 @@ export interface Message {
   user_id: string;
   content: string;
   sent_at: string;
-  username?: string;
+  username: string;
 }
 
 export interface ChatRoom {
   chat_room_id: string;
   chat_name: string;
-  usernames: string[];
+  usernames?: string[] | any;
   chat_messages: Message[];
 }
 

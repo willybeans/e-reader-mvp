@@ -10,11 +10,12 @@ import {
   TextInput as DefaultTextInput,
 } from "react-native";
 
-import Colors from "../constants/Colors";
+import Colors, { pallatte } from "../constants/Colors";
 
 export type ThemeProps = {
   lightColor?: string;
   darkColor?: string;
+  transparent?: boolean;
 };
 
 export type TextProps = ThemeProps & DefaultText["props"];
@@ -53,12 +54,11 @@ export function View(props: ViewProps) {
 }
 
 export function TextInput(props: TextInputProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+  const { style, lightColor, darkColor, transparent, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
-  const backgroundColor = useThemeColor(
-    { light: lightColor, dark: darkColor },
-    "background"
-  );
+  const backgroundColor = transparent
+    ? "transparent"
+    : useThemeColor({ light: lightColor, dark: darkColor }, "background");
   return (
     <DefaultTextInput
       style={[

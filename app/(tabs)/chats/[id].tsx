@@ -1,9 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocalSearchParams } from "expo-router";
-import { ScrollView, StyleSheet } from "react-native";
-import { Text, TextInput, View } from "../../../components/Themed";
+import { Dimensions, ScrollView, StyleSheet } from "react-native";
+import {
+  Text,
+  TextInput,
+  View,
+  useThemeColor,
+} from "../../../components/Themed";
 import { useWebSocketContext } from "../../../context/WebSocket";
 import { Button } from "../../../components/Button";
+import Colors, { pallatte } from "../../../constants/Colors";
+import { LinearGradient } from "expo-linear-gradient";
+
+const usersId = "d2792a62-86a4-4c49-a909-b1e762c683a3";
 
 export default () => {
   const { isReady, send, chatState } = useWebSocketContext();
@@ -12,6 +21,10 @@ export default () => {
   const [chatIndex, setChatIndex] = useState<number | null>(null);
   const [message, setMessage] = useState<string>("");
   const scrollViewRef = useRef<ScrollView>(null);
+  const backgroundColor = useThemeColor(
+    { light: pallatte.colorLightPurple, dark: pallatte.colorDarkPurple },
+    "background"
+  );
 
   useEffect(() => {
     if (typeof id === "string") {
@@ -26,7 +39,7 @@ export default () => {
         stringified = JSON.stringify({
           action: "post_message",
           chat_room_id: id,
-          user_id: "d2792a62-86a4-4c49-a909-b1e762c683a3",
+          user_id: usersId,
           content: message,
         });
         send(stringified);
@@ -39,23 +52,66 @@ export default () => {
 
   return (
     <View style={styles.container}>
+      <LinearGradient
+        // Background Linear Gradient
+        colors={[backgroundColor, "transparent"]}
+        end={{ x: 0.4, y: 0.4 }}
+        start={{ x: 1, y: 1 }}
+        style={styles.background}
+      />
       <ScrollView
+        style={styles.scrollContainer}
         ref={scrollViewRef}
         onContentSizeChange={() =>
           scrollViewRef?.current?.scrollToEnd({ animated: true })
         }
         contentContainerStyle={{
-          width: "100%",
+          flexGrow: 1,
+          paddingBottom: 90, //hack
+          backgroundColor: pallatte.transparent,
         }}
       >
-        <View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column-reverse",
+            backgroundColor: pallatte.transparent,
+          }}
+        >
           {chatIndex !== null &&
             chatState[chatIndex]?.chat_messages?.map((m, i) => (
-              <View key={i}>
-                <View>
-                  <Text>{m.username}</Text>
-                  <Text>{m.content}</Text>
+              <View
+                key={`message-${i}`}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  backgroundColor: pallatte.transparent,
+                }}
+              >
+                {m.user_id === usersId && <View />}
+                <View
+                  lightColor={
+                    m.user_id === usersId
+                      ? Colors.light.tint
+                      : Colors.dark.tabIconDefault
+                  }
+                  darkColor={
+                    m.user_id === usersId
+                      ? Colors.light.tint
+                      : Colors.dark.buttonDefault
+                  }
+                  style={styles.chatMessageComponent}
+                >
+                  <Text
+                    lightColor={Colors.light.text}
+                    darkColor={Colors.dark.text}
+                  >
+                    {m.content}
+                  </Text>
                 </View>
+                {m.user_id !== usersId && <View />}
               </View>
             ))}
         </View>
@@ -66,8 +122,11 @@ export default () => {
           style={{
             width: "70%",
             borderColor: "grey",
+            borderWidth: 1,
           }}
-          onChangeText={setMessage}
+          transparent
+          value={message}
+          onChangeText={(text: string) => setMessage(text)}
         />
         <Button title="Send" onPress={sendMessage} style={{ width: "25%" }} />
       </View>
@@ -75,16 +134,35 @@ export default () => {
   );
 };
 const styles = StyleSheet.create({
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: Dimensions.get("window").height,
+  },
   container: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
-    padding: 2,
+    width: "100%",
+    padding: 10,
   },
   inputContainer: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
     width: "100%",
+    backgroundColor: pallatte.transparent,
+  },
+  scrollContainer: {
+    height: "100%",
+    width: "100%",
+  },
+  chatMessageComponent: {
+    borderRadius: 10,
+    padding: 10,
+    margin: 2,
   },
 });

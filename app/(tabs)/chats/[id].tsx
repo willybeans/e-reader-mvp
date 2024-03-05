@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocalSearchParams } from "expo-router";
-import { Dimensions, ScrollView, StyleSheet } from "react-native";
 import {
-  Text,
-  TextInput,
-  View,
-  useThemeColor,
-} from "../../../components/Themed";
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
+import { Text, TextInput, View } from "../../../components/Themed";
 import { useWebSocketContext } from "../../../context/WebSocket";
 import { Button } from "../../../components/Button";
 import Colors, { pallatte } from "../../../constants/Colors";
@@ -16,15 +16,14 @@ const usersId = "d2792a62-86a4-4c49-a909-b1e762c683a3";
 
 export default () => {
   const { isReady, send, chatState } = useWebSocketContext();
-  const params = useLocalSearchParams();
-  const { id } = params;
+  const colorScheme = useColorScheme();
+
   const [chatIndex, setChatIndex] = useState<number | null>(null);
   const [message, setMessage] = useState<string>("");
   const scrollViewRef = useRef<ScrollView>(null);
-  const backgroundColor = useThemeColor(
-    { light: pallatte.colorLightPurple, dark: pallatte.colorDarkPurple },
-    "background"
-  );
+
+  const params = useLocalSearchParams();
+  const { id } = params;
 
   useEffect(() => {
     if (typeof id === "string") {
@@ -54,20 +53,22 @@ export default () => {
     <View style={styles.container}>
       <LinearGradient
         // Background Linear Gradient
-        colors={[backgroundColor, "transparent"]}
+        colors={[pallatte.colorDarkPurple, "transparent"]}
         end={{ x: 0.4, y: 0.4 }}
         start={{ x: 1, y: 1 }}
         style={styles.background}
       />
       <ScrollView
-        style={styles.scrollContainer}
+        style={{
+          maxHeight: "90%",
+          width: "100%",
+        }}
         ref={scrollViewRef}
         onContentSizeChange={() =>
           scrollViewRef?.current?.scrollToEnd({ animated: true })
         }
         contentContainerStyle={{
           flexGrow: 1,
-          paddingBottom: 90, //hack
           backgroundColor: pallatte.transparent,
         }}
       >
@@ -119,16 +120,21 @@ export default () => {
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Write a message"
+          multiline={true}
           style={{
             width: "70%",
-            borderColor: "grey",
-            borderWidth: 1,
+            borderColor: Colors[colorScheme ?? "light"].border,
+            borderWidth: 2,
           }}
           transparent
           value={message}
           onChangeText={(text: string) => setMessage(text)}
         />
-        <Button title="Send" onPress={sendMessage} style={{ width: "25%" }} />
+        <Button
+          title="Send"
+          onPress={sendMessage}
+          style={{ width: "25%", maxHeight: 40 }}
+        />
       </View>
     </View>
   );
@@ -153,12 +159,11 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     width: "100%",
-    backgroundColor: pallatte.transparent,
-  },
-  scrollContainer: {
-    height: "100%",
-    width: "100%",
+    paddingTop: 10,
+    // backgroundColor: "pallatte.transparent",
+    backgroundColor: "rgba(52, 52, 52, alpha)",
   },
   chatMessageComponent: {
     borderRadius: 10,

@@ -107,16 +107,20 @@ export function SearchContent(props: SearchContentProps) {
                     color={"#FFD700"}
                     // style={{ color: "gold" }}
                   /> */}
-                  <View style={styles.rating}>
-                    {[...Array(props?.content?.rating)].map((_, i) => (
-                      <FontAwesome
-                        key={`rating-star-${i}`}
-                        name="star"
-                        size={15}
-                        color={pallatte.colorGold}
-                      />
-                    ))}
-                  </View>
+                  {props.content.rating === undefined ? (
+                    <View />
+                  ) : (
+                    <View style={styles.rating}>
+                      {[...Array(props?.content?.rating)].map((_, i) => (
+                        <FontAwesome
+                          key={`rating-star-${i}`}
+                          name="star"
+                          size={15}
+                          color={pallatte.colorGold}
+                        />
+                      ))}
+                    </View>
+                  )}
                 </View>
                 <Text style={styles.text}>
                   <Text style={styles.bold}>Desc: </Text>

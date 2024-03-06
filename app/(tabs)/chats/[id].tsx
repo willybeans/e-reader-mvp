@@ -60,7 +60,7 @@ export default () => {
       />
       <ScrollView
         style={{
-          maxHeight: "90%",
+          maxHeight: "100%",
           width: "100%",
         }}
         ref={scrollViewRef}
@@ -150,20 +150,27 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
+    justifyContent: "space-between",
+    height: Dimensions.get("window").height - 95,
+    // height: "100%",
     width: "100%",
-    padding: 10,
+    // padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    borderColor: "red",
+    borderwidth: 2,
   },
   inputContainer: {
     display: "flex",
+    flexGrow: 0,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
     paddingTop: 10,
-    // backgroundColor: "pallatte.transparent",
-    backgroundColor: "rgba(52, 52, 52, alpha)",
+    paddingBottom: 10,
+    backgroundColor: "pallatte.transparent",
   },
   chatMessageComponent: {
     borderRadius: 10,

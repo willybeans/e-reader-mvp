@@ -4,8 +4,11 @@ import { ChatProvider } from "../../../context/Chats";
 import { useLocalSearchParams } from "expo-router";
 import { useWebSocketContext } from "../../../context/WebSocket";
 import { useEffect, useState } from "react";
+import Colors from "../../../constants/Colors";
+import { useColorScheme } from "react-native";
 
 export default function ChatsLayout() {
+  const colorScheme = useColorScheme();
   const { chatState } = useWebSocketContext();
   const params = useLocalSearchParams();
   const { id } = params;
@@ -23,7 +26,7 @@ export default function ChatsLayout() {
         screenOptions={({ route }) => ({
           // headerTintColor: grayDark.gray11,
           headerStyle: {
-            backgroundColor: "black",
+            backgroundColor: Colors[colorScheme ?? "light"].background,
           },
           headerTitleAlign: "center",
           // tabBarActiveTintColor: purple.purple8,
@@ -35,6 +38,7 @@ export default function ChatsLayout() {
         <Stack.Screen
           name="[id]"
           options={{ headerTitle: chatName }}
+
           // options={{ headerTitle: (props) => <Header {...props} /> }}
         />
       </Stack>

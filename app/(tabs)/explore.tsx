@@ -1,51 +1,107 @@
-import { StyleSheet } from "react-native";
-
-import { Text, View } from "../../components/Themed";
+import {
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
+import { TextInput, View } from "../../components/Themed";
 import { useEffect, useState } from "react";
+import Colors from "../../constants/Colors";
+
+import { SearchContent } from "../../components/SearchContent";
+import { Button } from "../../components/Button";
 import { api, buildUrl } from "../../helpers/api";
-import { ContentIcon } from "../../components/ContentIcon";
 
 export type Content = {
   id: string;
   author_id: string;
-  body_content: string;
+  description?: string;
+  genre?:
+    | "drama"
+    | "comedy"
+    | "horror"
+    | "action"
+    | "fantasy"
+    | "non-fiction"
+    | "fiction";
+  type?: "video" | "book" | "article" | "short story";
+  rating?: number;
+  // body_content: string; // remove from api res
   title: string;
   time_created: string;
 };
 
 export default function ExploreScreen() {
-  const [allContent, setAllContent] = useState<Content[]>([]);
+  const [allContent, setAllContent] = useState<SearchContent[]>([]);
+  const [search, setSearch] = useState<string>("");
 
+  const colorScheme = useColorScheme();
   useEffect(() => {
     (async function () {
       // need a user state object
-      const result: Content[] = await api(`${buildUrl()}/getAllContent`);
-
+      const result: SearchContent[] = await api(`${buildUrl()}/getAllContent`);
       setAllContent([...result]);
     })();
   }, []);
 
+  const handleSearch = async () => {
+    try {
+      const searchContent: SearchContent[] = await api(
+        `${buildUrl()}/getAllContentByQuery?query=${search}`
+      );
+      setAllContent([...searchContent]);
+      setSearch("");
+    } catch (e) {
+      console.error("error: ", e);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Explore</Text>
-      <View style={styles.contentContainer}>
-        {allContent?.map((c, i) => (
-          <ContentIcon content={c} key={i} />
-        ))}
+      <View style={styles.searchContainer}>
+        <TextInput
+          placeholder="Search our library for content"
+          style={{
+            width: "70%",
+            borderColor: Colors[colorScheme ?? "light"].border,
+            borderWidth: 2,
+          }}
+          transparent
+          value={search}
+          onChangeText={async (text: string) => {
+            setSearch(text);
+          }}
+        />
+        <Button title="Search" onPress={handleSearch} />
       </View>
+
+      <ScrollView
+        horizontal={false}
+        contentContainerStyle={{
+          flexGrow: 1,
+          maxWidth: Dimensions.get("window").width,
+        }}
+      >
+        {allContent?.map((c, i) => (
+          <SearchContent content={c} key={`search-result-${i}`} />
+        ))}
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    padding: 5,
+    height: "100%",
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
+  searchContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   contentContainer: {
     flexDirection: "row",
@@ -55,6 +111,9 @@ const styles = StyleSheet.create({
     width: "100%",
     marginLeft: 10,
     marginRight: 10,
+  },
+  searchContent: {
+    width: "100%",
   },
   separator: {
     marginVertical: 30,

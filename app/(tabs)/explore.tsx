@@ -12,7 +12,7 @@ import { SearchContent } from "../../components/SearchContent";
 import { Button } from "../../components/Button";
 import { api, buildUrl } from "../../helpers/api";
 
-export type Content = {
+type SearchContent = {
   id: string;
   author_id: string;
   description?: string;

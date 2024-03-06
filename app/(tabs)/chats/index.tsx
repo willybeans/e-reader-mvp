@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, HrefObject } from "expo-router";
 import { ScrollView, Image, StyleSheet, Dimensions } from "react-native";
-import { Text, View, useThemeColor } from "../../../components/Themed";
+import { Text, View } from "../../../components/Themed";
 import { useWebSocketContext } from "../../../context/WebSocket";
 import { pallatte } from "../../../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
@@ -12,10 +12,6 @@ type Url = {
 };
 
 export default () => {
-  const backgroundColor = useThemeColor(
-    { light: pallatte.colorLightPurple, dark: pallatte.colorDarkPurple },
-    "background"
-  );
   const { isReady, send, chatState } = useWebSocketContext();
 
   useEffect(() => {
@@ -43,7 +39,7 @@ export default () => {
     >
       <LinearGradient
         // Background Linear Gradient
-        colors={[backgroundColor, "transparent"]}
+        colors={[pallatte.colorDarkPurple, "transparent"]}
         end={{ x: 0.4, y: 0.4 }}
         start={{ x: 1, y: 1 }}
         style={styles.background}
@@ -92,10 +88,10 @@ export default () => {
                     <Text
                       numberOfLines={2}
                       style={{
-                        color: pallatte.colorGrey,
+                        color: pallatte.colorDarkGrey,
                       }}
                     >
-                      {c?.chat_messages[c.chat_messages.length - 1]?.content}
+                      {c?.chat_messages[0]?.content}
                     </Text>
                   </View>
                 </View>

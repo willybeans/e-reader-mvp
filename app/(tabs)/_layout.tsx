@@ -1,8 +1,8 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Tabs } from "expo-router";
+import { Link, Tabs, usePathname } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 
-import Colors from "../../constants/Colors";
+import Colors, { pallatte } from "../../constants/Colors";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -16,6 +16,7 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const usePath = usePathname();
 
   return (
     <Tabs
@@ -42,14 +43,18 @@ export default function TabLayout() {
           return <TabBarIcon name={iconName} color={color} />;
         },
         // headerTintColor: grayDark.gray11,
-        // headerStyle: {
-        //   backgroundColor: "black",
-        // },
+        headerStyle: {
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+        },
         // headerTitleAlign: "center",
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        // tabBarActiveTintColor: purple.purple8,
         // tabBarInactiveTintColor: grayDark.gray11,
-
-        tabBarStyle: { backgroundColor: "black" },
+        tabBarStyle: {
+          display: usePath.includes("/chats/") ? "none" : "flex", // hack
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+        },
+        tabBarActiveTintColor: pallatte.colorDarkPurple,
+        tabBarInactiveTintColor: Colors[colorScheme ?? "light"].tabIconDefault,
       })}
     >
       <Tabs.Screen
@@ -57,13 +62,20 @@ export default function TabLayout() {
         options={{
           title: "Learn",
           headerRight: () => (
-            <Link href="/modal" asChild>
+            // <Link href="/modal" asChild>
+            <Link href="/upload" asChild>
               <Pressable>
                 {({ pressed }) => (
+                  // <FontAwesome
+                  //   name="info-circle"
+                  //   size={25}
+                  //   color={Colors[colorScheme ?? "light"].text}
+                  //   style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  // />
                   <FontAwesome
-                    name="info-circle"
+                    name="plus"
                     size={25}
-                    color={Colors[colorScheme ?? "light"].text}
+                    color={Colors[colorScheme ?? "light"].tint}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}

@@ -1,5 +1,10 @@
 import React from "react";
-import { Pressable, StyleSheet, useColorScheme } from "react-native";
+import {
+  Dimensions,
+  Pressable,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
 import { Text, View } from "./Themed";
 import Colors from "../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
@@ -43,10 +48,10 @@ export function ContentIcon(props: CountBannerProps) {
                 color={Colors[colorScheme ?? "light"].text}
                 style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
               />
-              <Text style={styles.text}>
+              {/* <Text style={styles.text}>
                 {pressed ? "Pressed!" : "Press Me"}
-              </Text>
-              <Text>{props.content?.title}</Text>
+              </Text> */}
+              <Text style={styles.text}>{props.content?.title}</Text>
             </View>
           )}
         </Pressable>
@@ -58,20 +63,23 @@ export function ContentIcon(props: CountBannerProps) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    flexGrow: 0,
     marginTop: 10,
     marginBottom: 10,
+    width: Dimensions.get("window").width * 0.4,
+    height: Dimensions.get("window").width * 0.3,
   },
   iconWrapper: {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",
+    width: "100%",
   },
   icon: {
     height: 100,
     backgroundColor: "red",
   },
-
   text: {},
 });

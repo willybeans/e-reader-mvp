@@ -10,8 +10,9 @@ export const pallatte = {
   colorGrey: "#B4B4B4",
   colorLightGrey: "#CCCCCC",
   colorDarkPurple: "#7C2EDB",
-  colorLightPurple: "#E2D1F0",
+  colorLightPurple: "#EFE8F7", // "#EFE8F7", // "#E2D1F0",
   transparent: "rgba(52, 52, 52, alpha)",
+  colorGold: "#C7AC16", // "#FFD700"
 };
 
 export default {
@@ -19,9 +20,11 @@ export default {
     text: pallatte.colorBlack,
     background: pallatte.colorWhite,
     tint: pallatte.colorDarkPurple,
-    tabIconDefault: pallatte.colorLightGrey,
+    tabIconDefault: pallatte.colorDarkGrey,
     tabIconSelected: pallatte.colorDarkPurple,
     buttonDefault: pallatte.colorGrey,
+    border: pallatte.colorDarkGrey,
+    matchTint: pallatte.colorLightPurple,
   },
   dark: {
     text: pallatte.colorWhite,
@@ -30,5 +33,7 @@ export default {
     tabIconDefault: pallatte.colorLightGrey,
     tabIconSelected: pallatte.colorLightPurple,
     buttonDefault: pallatte.colorDarkGrey,
+    border: pallatte.colorLightGrey,
+    matchTint: pallatte.colorDarkPurple,
   },
 };

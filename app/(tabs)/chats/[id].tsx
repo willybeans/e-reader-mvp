@@ -127,6 +127,7 @@ export default () => {
             borderWidth: 2,
           }}
           transparent
+          placeholderTextColor={Colors[colorScheme ?? "light"].placeholder}
           value={message}
           onChangeText={(text: string) => setMessage(text)}
         />

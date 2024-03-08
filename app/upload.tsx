@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
+  useColorScheme,
 } from "react-native";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
@@ -14,6 +15,7 @@ import { Button } from "../components/Button";
 import { api, buildUrl, getLocalType, ReqBody } from "../helpers/api";
 import { Link, router } from "expo-router";
 import { storeData } from "../helpers/localStorage";
+import Colors, { pallatte } from "../constants/Colors";
 
 type Asset = {
   test?: any;
@@ -23,6 +25,7 @@ type Asset = {
 };
 
 export default function UploadScreen() {
+  const colorScheme = useColorScheme();
   const [image, setImage] = useState<any>(null);
   const [asset, setAsset] = useState<Asset>({} as Asset);
   const [link, setLink] = useState<string>("");
@@ -62,8 +65,18 @@ export default function UploadScreen() {
         "content-type": "multipart/form-data",
       },
     } as ReqBody);
-    // setText(imageData.message);
     displayModal(imageData.message);
+  };
+
+  const onCancel = () => {
+    setImage(null);
+    setAsset({} as Asset);
+  };
+
+  const onContinue = () => {
+    displayModal(`
+    Start writing your own content here by clicking the edit button! Please try and use simple words and phrases and provide a lot of context for what more difficult words may mean
+  `);
   };
 
   const pickImage = async () => {
@@ -97,48 +110,78 @@ export default function UploadScreen() {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.title}>Text From Website</Text>
-        <View style={styles.rowWrap}>
-          <View
+    <View style={styles.container}>
+      <Text style={styles.title}>Text From Website</Text>
+      <Text style={styles.textInstructions}>
+        Please insert a valid url of a website
+      </Text>
+      <View style={styles.rowWrap}>
+        {/* <View
             style={styles.input}
             lightColor="#eee"
             darkColor="rgba(255,255,255,0.1)"
-          >
-            <TextInput
-              onChangeText={setLink}
-              placeholder="Your URL Here"
-              style={{
-                height: "100%",
-                width: "100%",
-              }}
-            />
-          </View>
-          <Button onPress={onLinkSubmit} />
-        </View>
-
-        <View
-          style={styles.separator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
+          > */}
+        <TextInput
+          onChangeText={setLink}
+          placeholder="Your URL Here"
+          style={{
+            borderColor: Colors[colorScheme ?? "light"].border,
+            // marginLeft: 10,
+            height: "100%",
+            width: "70%",
+          }}
         />
-        <Text style={styles.title}>Text From Image</Text>
-        <Button title="Upload Image" onPress={pickImage} />
-
-        {/* Use a light status bar on iOS to account for the black space above the modal */}
-        <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
-        {image && (
-          <>
-            <Image
-              source={{ uri: image }}
-              style={{ width: 200, height: 200 }}
-            />
-            <Button title="Submit" onPress={onSubmit} />
-          </>
-        )}
+        {/* </View> */}
+        <Button onPress={onLinkSubmit} />
       </View>
-    </ScrollView>
+
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+      <Text style={styles.title}>Text From Image</Text>
+
+      <View style={{ width: "100%", marginLeft: 20 }}>
+        <Text style={styles.textInstructions}>
+          Please adhere to the following:
+        </Text>
+        <Text style={styles.textInstructions}>
+          {`\u2022 use good lighting when taking your photo`}
+        </Text>
+        <Text style={styles.textInstructions}>
+          {`\u2022 insert a JPEG, PNG, or Tiff file type`}
+        </Text>
+      </View>
+
+      {image ? <View /> : <Button title="Upload Image" onPress={pickImage} />}
+
+      {/* Use a light status bar on iOS to account for the black space above the modal */}
+      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
+      {image && (
+        <>
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+              width: 200,
+            }}
+          >
+            <Button title="Submit" onPress={onSubmit} />
+            <Button title="Cancel" onPress={onCancel} />
+          </View>
+        </>
+      )}
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+      <Text style={styles.title}>Write your own custom content</Text>
+      <Button title="Continue" onPress={onContinue} />
+    </View>
   );
 }
 
@@ -146,23 +189,31 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    height: "100%",
   },
   rowWrap: {
     display: "flex",
     flexDirection: "row",
     width: "100%",
+    paddingLeft: 10,
+    paddingRight: 10,
     alignContent: "center",
     justifyContent: "space-between",
   },
   title: {
+    marginTop: 20,
+    marginBottom: 10,
     fontSize: 20,
     fontWeight: "bold",
   },
   input: {
     height: 30,
     flex: 1,
-    borderBlockColor: "fff",
+  },
+  textInstructions: {
+    fontSize: 18,
+    marginBottom: 10,
   },
   separator: {
     marginVertical: 30,

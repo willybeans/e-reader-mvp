@@ -18,8 +18,15 @@ type UserProfile = {
   id: string;
   username: string;
   profile: string;
+  age: string;
+  location: string;
+  native_language: string;
+  target_language: string;
+  last_online: string;
   time_created: string;
 };
+
+const usersId = "d2792a62-86a4-4c49-a909-b1e762c683a3";
 
 export default function ProfileScreen() {
   const [userProfile, setUserProfile] = useState<UserProfile>(
@@ -75,23 +82,30 @@ export default function ProfileScreen() {
       <View>
         <Image
           source={{ uri: "http://placekitten.com/200/300" }}
-          style={{ width: 100, height: 100 }}
+          style={{ width: 100, height: 100, borderRadius: 100 }}
         />
       </View>
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
       <View style={styles.contentContainer}>
-        <View style={styles.contentContainerHeading}>
+        <View style={[{}, styles.contentContainerHeading]}>
           <View>
-            <Text>{userProfile?.username}'s Profile</Text>
+            <Text>{userProfile?.username}'s profile</Text>
           </View>
           <View>
-            <Pressable onPress={() => setIsEdit(!isEdit)}>
-              <FontAwesome
-                name="edit"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+            {usersId === userProfile.id && (
+              <Pressable onPress={() => setIsEdit(!isEdit)}>
+                <FontAwesome
+                  name="edit"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                  style={{ marginRight: 15 }}
+                />
+              </Pressable>
+            )}
           </View>
         </View>
 
@@ -106,7 +120,15 @@ export default function ProfileScreen() {
             </>
           ) : (
             <>
-              <Text style={{ marginBottom: 10 }}>PROFILE</Text>
+              <Text
+                style={{
+                  textDecorationLine: "underline",
+                  fontSize: 18,
+                  marginBottom: 10,
+                }}
+              >
+                About Me
+              </Text>
               <Text>{userProfile?.profile}</Text>
             </>
           )}
@@ -126,6 +148,8 @@ const styles = StyleSheet.create({
   contentContainer: {
     width: "100%",
     height: "100%",
+    paddingLeft: 10,
+    paddingRight: 10,
     alignItems: "center",
     justifyContent: "flex-start",
   },

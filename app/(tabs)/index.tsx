@@ -13,6 +13,9 @@ export type Content = {
   author_id: string;
   body_content: string;
   title: string;
+  description: string;
+  genre: string;
+  last_opened: string;
   time_created: string;
 };
 

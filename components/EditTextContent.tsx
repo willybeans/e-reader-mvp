@@ -15,16 +15,14 @@ export default function EditTextContent(props: Props) {
   // }, [props]);
 
   return (
-    <View>
-      <View style={styles.container}>
-        <TextInput
-          multiline
-          numberOfLines={8}
-          style={styles.textContainer}
-          onChangeText={(newText) => props.updateContent(newText)}
-          defaultValue={props.content}
-        />
-      </View>
+    <View style={styles.container}>
+      <TextInput
+        multiline
+        numberOfLines={2}
+        style={styles.textContainer}
+        onChangeText={(newText) => props.updateContent(newText)}
+        defaultValue={props.content}
+      />
     </View>
   );
 }
@@ -35,6 +33,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     borderBottomColor: "#000",
     borderBottomWidth: 1,
+    maxHeight: "50%",
     backgroundColor: "#FFF",
   },
   textContainer: {

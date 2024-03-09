@@ -17,8 +17,8 @@ export function PickerComponent(props: Props) {
       selectedValue={props.pickerValue}
       onValueChange={(itemValue, itemIndex) => props.setPickerValue(itemValue)}
     >
-      {props.labels.map((l) => {
-        return <Picker.Item label={l} value={l} />;
+      {props.labels.map((l, i) => {
+        return <Picker.Item key={`${i}-picker-${l}`} label={l} value={l} />;
         // <Picker.Item label="Action" value="action" />
       })}
     </Picker>

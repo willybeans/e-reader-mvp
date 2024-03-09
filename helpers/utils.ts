@@ -1,5 +1,11 @@
 export const cleanString = (str: string): string => {
-  const cleanSlash = str.replace("\\n|\\/gm", " ");
+  console.log("str", str);
+  // const cleanSlash = str.replace("/\\n|\\/gm", " ");
+  const cleanSlash = str.replace(/(\r\n|\n|\r)/gm, " ");
+  console.log("cleanSlash", cleanSlash);
+  let pattern = /\n/;
+  let result = str.search(pattern);
+  console.log("result", result);
   return cleanSlash;
 };
 

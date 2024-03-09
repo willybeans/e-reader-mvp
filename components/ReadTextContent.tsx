@@ -30,7 +30,10 @@ export default function ReadTextContent(props: Props) {
       const windowHeight = Dimensions.get("window").height;
 
       const cleaned = cleanString(props.content); // broken?
-      const paginated = createPagination(Math.floor(windowHeight / 4), cleaned);
+      const paginated = createPagination(
+        Math.floor(windowHeight / 2.5),
+        cleaned
+      );
       setText(paginated);
     }
   }, [props]);

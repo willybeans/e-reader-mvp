@@ -16,25 +16,29 @@ export function CountBanner(props: CountBannerProps) {
 
   return (
     <View style={styles.banner}>
-      {page !== undefined && page > 0 && (
+      {page !== undefined && page > 0 ? (
         <FontAwesome
           name="arrow-left"
           size={25}
           color={Colors[colorScheme ?? "light"].text}
           onPress={() => onPress("down")}
         />
+      ) : (
+        <View style={{ width: 25 }} />
       )}
       {page !== undefined && <Text style={styles.counter}>{page}</Text>}
       {totalPages !== undefined &&
-        page !== undefined &&
-        page < totalPages - 1 && (
-          <FontAwesome
-            name="arrow-right"
-            size={25}
-            color={Colors[colorScheme ?? "light"].text}
-            onPress={() => onPress("up")}
-          />
-        )}
+      page !== undefined &&
+      page < totalPages - 1 ? (
+        <FontAwesome
+          name="arrow-right"
+          size={25}
+          color={Colors[colorScheme ?? "light"].text}
+          onPress={() => onPress("up")}
+        />
+      ) : (
+        <View style={{ width: 25 }} />
+      )}
     </View>
   );
 }

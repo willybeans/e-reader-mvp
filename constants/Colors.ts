@@ -25,6 +25,7 @@ export default {
     buttonDefault: pallatte.colorGrey,
     border: pallatte.colorDarkGrey,
     matchTint: pallatte.colorLightPurple,
+    placeholder: pallatte.colorDarkGrey,
   },
   dark: {
     text: pallatte.colorWhite,
@@ -35,5 +36,6 @@ export default {
     buttonDefault: pallatte.colorDarkGrey,
     border: pallatte.colorLightGrey,
     matchTint: pallatte.colorDarkPurple,
+    placeholder: pallatte.colorGrey,
   },
 };

@@ -28,3 +28,17 @@ export const createPagination = (n: number, str: string) => {
   }
   return result;
 };
+
+function treatAsUTC(date: Date) {
+  const result = new Date(date);
+  result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+  return result;
+}
+
+export const daysBetween = (startDate: Date, endDate: Date) => {
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+  return (
+    (treatAsUTC(endDate).valueOf() - treatAsUTC(startDate).valueOf()) /
+    millisecondsPerDay
+  );
+};

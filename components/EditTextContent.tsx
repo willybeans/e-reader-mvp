@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import { Text, View, TextInput } from "./Themed";
+import { StyleSheet, useColorScheme } from "react-native";
+import { View, TextInput } from "./Themed";
+import Colors from "../constants/Colors";
 
 type Props = {
   content?: string;
@@ -8,14 +9,16 @@ type Props = {
 };
 
 export default function EditTextContent(props: Props) {
-  // const [text, setText] = useState<string>("");
-
-  // useEffect(() => {
-  //   if (props?.content) setText(props.content);
-  // }, [props]);
-
+  const colorScheme = useColorScheme();
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        {
+          borderColor: Colors[colorScheme ?? "light"].border,
+        },
+        styles.container,
+      ]}
+    >
       <TextInput
         multiline
         numberOfLines={2}
@@ -29,12 +32,13 @@ export default function EditTextContent(props: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    marginHorizontal: 50,
-    borderBottomColor: "#000",
-    borderBottomWidth: 1,
-    maxHeight: "50%",
-    backgroundColor: "#FFF",
+    maxWidth: "100%",
+    maxHeight: "100%",
+    marginTop: 10,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderRadius: 15,
+    padding: 2,
   },
   textContainer: {
     padding: 10,

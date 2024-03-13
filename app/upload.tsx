@@ -1,21 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  ScrollView,
-  Pressable,
-  useColorScheme,
-} from "react-native";
+import { Image, Platform, StyleSheet, useColorScheme } from "react-native";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 
 import { Text, View, TextInput } from "../components/Themed";
 import { Button } from "../components/Button";
-import { api, buildUrl, getLocalType, ReqBody } from "../helpers/api";
-import { Link, router } from "expo-router";
+import { api, buildUrl, ReqBody } from "../helpers/api";
+import { router } from "expo-router";
 import { storeData } from "../helpers/localStorage";
-import Colors, { pallatte } from "../constants/Colors";
+import Colors from "../constants/Colors";
 
 type Asset = {
   test?: any;
@@ -172,17 +165,21 @@ export default function UploadScreen() {
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-between",
+              justifyContent: "center",
               marginTop: 20,
-              width: 200,
+              width: "100%",
             }}
           >
             <Button
               title="Submit"
-              style={{ maxWidth: "25%" }}
+              style={{ maxWidth: "25%", marginRight: 10 }}
               onPress={onSubmit}
             />
-            <Button title="Cancel" onPress={onCancel} />
+            <Button
+              style={{ maxWidth: "25%" }}
+              title="Cancel"
+              onPress={onCancel}
+            />
           </View>
         </>
       )}

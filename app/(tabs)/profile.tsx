@@ -87,78 +87,67 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <View
-        style={{
-          top: 0,
-          left: -65,
-          backgroundColor:
-            colorScheme === "light" ? pallatte.colorGrey : pallatte.colorGold, //matchTint
-          position: "absolute",
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          zIndex: 0,
-        }}
+        style={[
+          styles.bubble,
+          {
+            top: 0,
+            left: -65,
+            backgroundColor:
+              colorScheme === "light" ? pallatte.colorGrey : pallatte.colorGold,
+          },
+        ]}
       />
       <View
-        style={{
-          top: -50,
-          left: -15,
-          backgroundColor:
-            colorScheme === "light"
-              ? pallatte.colorGold
-              : pallatte.colorDarkPurple, //matchTint
-          position: "absolute",
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          zIndex: 0,
-        }}
+        style={[
+          styles.bubble,
+          {
+            top: -50,
+            left: -15,
+            backgroundColor:
+              colorScheme === "light"
+                ? pallatte.colorGold
+                : pallatte.colorDarkPurple,
+          },
+        ]}
       />
       <View
-        style={{
-          top: 10,
-          right: -45,
-          backgroundColor:
-            colorScheme === "light"
-              ? pallatte.colorDarkGrey
-              : pallatte.colorDarkGrey, //tabIconDefault
-          position: "absolute",
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          zIndex: 0,
-        }}
+        style={[
+          styles.bubble,
+          {
+            top: 10,
+            right: -45,
+            backgroundColor:
+              colorScheme === "light"
+                ? pallatte.colorDarkGrey
+                : pallatte.colorDarkGrey,
+          },
+        ]}
       />
       <View
-        style={{
-          top: -75,
-          right: 50,
-          backgroundColor:
-            colorScheme === "light"
-              ? pallatte.colorDarkPurple
-              : pallatte.colorLightPurple,
-          //buttonDefault
-          position: "absolute",
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          zIndex: 0,
-        }}
+        style={[
+          styles.bubble,
+          {
+            top: -75,
+            right: 50,
+            backgroundColor:
+              colorScheme === "light"
+                ? pallatte.colorDarkPurple
+                : pallatte.colorLightPurple,
+          },
+        ]}
       />
       <View
-        style={{
-          bottom: -55,
-          left: -10,
-          backgroundColor:
-            colorScheme === "light"
-              ? pallatte.colorLightPurple
-              : pallatte.colorGrey, //tint
-          position: "absolute",
-          width: 100,
-          height: 100,
-          borderRadius: 50,
-          zIndex: 0,
-        }}
+        style={[
+          styles.bubble,
+          {
+            bottom: -55,
+            left: -10,
+            backgroundColor:
+              colorScheme === "light"
+                ? pallatte.colorLightPurple
+                : pallatte.colorGrey,
+          },
+        ]}
       />
       <View
         style={{
@@ -170,6 +159,7 @@ export default function ProfileScreen() {
       >
         <Image
           source={{ uri: "http://placekitten.com/200/300" }}
+          // defaultSource={}
           style={{
             width: 100,
             height: 100,
@@ -301,6 +291,13 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     alignItems: "center",
+  },
+  bubble: {
+    position: "absolute",
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    zIndex: 0,
   },
   timeHeader: {
     alignItems: "center",

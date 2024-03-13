@@ -69,7 +69,7 @@ export default function TabLayout() {
                     name="plus"
                     size={25}
                     color={Colors[colorScheme ?? "light"].matchTint}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    style={{ marginRight: 16, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
               </Pressable>

@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
     minHeight: 50,
     borderRadius: 100,
     marginRight: 10,
+    backgroundColor: pallatte.colorGrey,
   },
   chatPreview: {
     display: "flex",

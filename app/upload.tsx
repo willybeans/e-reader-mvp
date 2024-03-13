@@ -132,7 +132,7 @@ export default function UploadScreen() {
           }}
         />
         {/* </View> */}
-        <Button onPress={onLinkSubmit} />
+        <Button style={{ maxWidth: "25%" }} onPress={onLinkSubmit} />
       </View>
 
       <View
@@ -154,7 +154,15 @@ export default function UploadScreen() {
         </Text>
       </View>
 
-      {image ? <View /> : <Button title="Upload Image" onPress={pickImage} />}
+      {image ? (
+        <View />
+      ) : (
+        <Button
+          style={{ maxWidth: "50%" }}
+          title="Upload Image"
+          onPress={pickImage}
+        />
+      )}
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
@@ -169,7 +177,11 @@ export default function UploadScreen() {
               width: 200,
             }}
           >
-            <Button title="Submit" onPress={onSubmit} />
+            <Button
+              title="Submit"
+              style={{ maxWidth: "25%" }}
+              onPress={onSubmit}
+            />
             <Button title="Cancel" onPress={onCancel} />
           </View>
         </>
@@ -180,7 +192,11 @@ export default function UploadScreen() {
         darkColor="rgba(255,255,255,0.1)"
       />
       <Text style={styles.title}>Write your own custom content</Text>
-      <Button title="Continue" onPress={onContinue} />
+      <Button
+        title="Continue"
+        style={{ maxWidth: "50%" }}
+        onPress={onContinue}
+      />
     </View>
   );
 }

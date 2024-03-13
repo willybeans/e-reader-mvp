@@ -62,20 +62,13 @@ export default function TabLayout() {
         options={{
           title: "Learn",
           headerRight: () => (
-            // <Link href="/modal" asChild>
             <Link href="/upload" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  // <FontAwesome
-                  //   name="info-circle"
-                  //   size={25}
-                  //   color={Colors[colorScheme ?? "light"].text}
-                  //   style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  // />
                   <FontAwesome
                     name="plus"
                     size={25}
-                    color={Colors[colorScheme ?? "light"].tint}
+                    color={Colors[colorScheme ?? "light"].matchTint}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}

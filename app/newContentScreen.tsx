@@ -184,8 +184,7 @@ export default function NewContentScreen() {
                 marginLeft: 10,
                 height: "100%",
                 justifyContent: "center",
-                borderWidth: 1,
-                borderColor: Colors[colorScheme ?? "light"].border,
+                padding: 1,
                 backgroundColor: Colors[colorScheme ?? "light"].matchTint,
               }}
             >

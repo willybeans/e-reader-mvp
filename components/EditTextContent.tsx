@@ -21,7 +21,7 @@ export default function EditTextContent(props: Props) {
     >
       <TextInput
         multiline
-        numberOfLines={2}
+        numberOfLines={5}
         style={styles.textContainer}
         onChangeText={(newText) => props.updateContent(newText)}
         defaultValue={props.content}
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     padding: 2,
   },
   textContainer: {
+    maxHeight: 200,
     padding: 10,
   },
 });

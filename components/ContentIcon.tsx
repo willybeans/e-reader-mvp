@@ -24,7 +24,7 @@ export function ContentIcon(props: CountBannerProps) {
       <Link
         href={{
           pathname: `/reader/${props?.content?.id}`,
-          params: { id: props?.content?.id as string },
+          // params: { id: props?.content?.id as string },
         }}
         asChild
       >
@@ -46,7 +46,7 @@ export function ContentIcon(props: CountBannerProps) {
                 name="book"
                 size={55}
                 color={Colors[colorScheme ?? "light"].text}
-                style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                // style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
               />
               {/* <Text style={styles.text}>
                 {pressed ? "Pressed!" : "Press Me"}

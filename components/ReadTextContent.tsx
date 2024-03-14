@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Dimensions, StyleSheet } from "react-native";
 import { Text, View } from "./Themed";
 import { cleanString, createPagination } from "../helpers/utils";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler";
 import { CountBanner } from "./CountBanner";
 
 type Props = {
@@ -48,19 +52,21 @@ export default function ReadTextContent(props: Props) {
   };
 
   return (
-    <GestureDetector gesture={pan}>
-      <View>
-        <CountBanner
-          page={page}
-          totalPages={text?.length}
-          onPress={pagePress}
-        />
-        <View style={styles.container}>
-          {/* {headingText && <Text>{headingText}</Text>} */}
-          <Text style={styles.readerText}>{text[page]}</Text>
+    <GestureHandlerRootView>
+      <GestureDetector gesture={pan}>
+        <View>
+          <CountBanner
+            page={page}
+            totalPages={text?.length}
+            onPress={pagePress}
+          />
+          <View style={styles.container}>
+            {/* {headingText && <Text>{headingText}</Text>} */}
+            <Text style={styles.readerText}>{text[page]}</Text>
+          </View>
         </View>
-      </View>
-    </GestureDetector>
+      </GestureDetector>
+    </GestureHandlerRootView>
   );
 }
 

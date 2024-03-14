@@ -37,7 +37,7 @@ export function UsersSearchComponent(props: UserSearchProps) {
       <Link
         href={{
           pathname: `/chats/${props.content.id}`,
-          params: { id: props?.content?.id as string },
+          // params: { id: props?.content?.id as string },
         }}
         asChild
         style={{ width: "100%", backgroundColor: "transparent" }}

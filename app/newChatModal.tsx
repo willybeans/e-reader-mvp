@@ -1,7 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { Dimensions, Platform, StyleSheet, useColorScheme } from "react-native";
+import {
+  Dimensions,
+  ScrollView,
+  Platform,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
 import { useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
 
 import { Text, TextInput, View } from "../components/Themed";
 import { Button } from "../components/Button";

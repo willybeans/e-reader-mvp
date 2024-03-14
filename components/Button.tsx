@@ -26,7 +26,15 @@ export function Button({
   );
   return (
     <View style={[{ backgroundColor }, styles.button, style]}>
-      <Pressable onPress={onPress}>
+      <Pressable
+        style={{
+          width: "100%",
+          height: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        onPress={onPress}
+      >
         <Text style={styles.text}>{title}</Text>
       </Pressable>
     </View>
@@ -37,8 +45,10 @@ export const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 6,
-    paddingHorizontal: 16,
+    width: "100%",
+    height: 35,
+    paddingVertical: 2,
+    paddingHorizontal: 2,
     borderRadius: 4,
     elevation: 3,
   },

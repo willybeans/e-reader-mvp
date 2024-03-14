@@ -4,7 +4,7 @@
 // const tintColorDark = "#e2d1f0";
 
 export const pallatte = {
-  colorWhite: "#FFFFFF",
+  colorWhite: "#FCFAFF", // #FCFAFF
   colorBlack: "#000000",
   colorDarkGrey: "#484848",
   colorGrey: "#B4B4B4",
@@ -12,7 +12,7 @@ export const pallatte = {
   colorDarkPurple: "#7C2EDB",
   colorLightPurple: "#EFE8F7", // "#EFE8F7", // "#E2D1F0",
   transparent: "rgba(52, 52, 52, alpha)",
-  colorGold: "#C7AC16", // "#FFD700"
+  colorGold: "#FFC145", // "#C7AC16", // "#FFD700"
 };
 
 export default {
@@ -25,6 +25,7 @@ export default {
     buttonDefault: pallatte.colorGrey,
     border: pallatte.colorDarkGrey,
     matchTint: pallatte.colorLightPurple,
+    placeholder: pallatte.colorDarkGrey,
   },
   dark: {
     text: pallatte.colorWhite,
@@ -35,5 +36,6 @@ export default {
     buttonDefault: pallatte.colorDarkGrey,
     border: pallatte.colorLightGrey,
     matchTint: pallatte.colorDarkPurple,
+    placeholder: pallatte.colorGrey,
   },
 };

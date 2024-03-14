@@ -36,6 +36,7 @@ export default function ExploreScreen() {
   const [search, setSearch] = useState<string>("");
 
   const colorScheme = useColorScheme();
+
   useEffect(() => {
     (async function () {
       // need a user state object
@@ -72,7 +73,11 @@ export default function ExploreScreen() {
             setSearch(text);
           }}
         />
-        <Button title="Search" onPress={handleSearch} />
+        <Button
+          style={{ width: "25%" }}
+          title="Search"
+          onPress={handleSearch}
+        />
       </View>
 
       <ScrollView

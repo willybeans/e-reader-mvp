@@ -6,7 +6,7 @@ import {
   useColorScheme,
 } from "react-native";
 import { Text, View } from "./Themed";
-import Colors from "../constants/Colors";
+import Colors, { pallatte } from "../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { Content } from "../app/(tabs)";
 import { Link } from "expo-router";

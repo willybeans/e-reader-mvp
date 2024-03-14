@@ -1,5 +1,11 @@
 export const cleanString = (str: string): string => {
-  const cleanSlash = str.replace("\\n|\\/gm", " ");
+  console.log("str", str);
+  // const cleanSlash = str.replace("/\\n|\\/gm", " ");
+  const cleanSlash = str.replace(/(\r\n|\n|\r)/gm, " ");
+  console.log("cleanSlash", cleanSlash);
+  let pattern = /\n/;
+  let result = str.search(pattern);
+  console.log("result", result);
   return cleanSlash;
 };
 
@@ -21,4 +27,18 @@ export const createPagination = (n: number, str: string) => {
     result.push(subStr);
   }
   return result;
+};
+
+function treatAsUTC(date: Date) {
+  const result = new Date(date);
+  result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+  return result;
+}
+
+export const daysBetween = (startDate: Date, endDate: Date) => {
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+  return (
+    (treatAsUTC(endDate).valueOf() - treatAsUTC(startDate).valueOf()) /
+    millisecondsPerDay
+  );
 };

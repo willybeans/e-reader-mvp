@@ -10,16 +10,24 @@ import { Text, View } from "../../components/Themed";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { api, buildUrl } from "../../helpers/api";
 import { FontAwesome } from "@expo/vector-icons";
-import Colors from "../../constants/Colors";
+import Colors, { pallatte } from "../../constants/Colors";
 import EditTextContent from "../../components/EditTextContent";
 import { Button } from "../../components/Button";
+import { daysBetween } from "../../helpers/utils";
 
 type UserProfile = {
   id: string;
   username: string;
   profile: string;
+  age: string;
+  location: string;
+  native_language: string;
+  target_language: string;
+  last_online: string;
   time_created: string;
 };
+
+const usersId = "d2792a62-86a4-4c49-a909-b1e762c683a3";
 
 export default function ProfileScreen() {
   const [userProfile, setUserProfile] = useState<UserProfile>(
@@ -27,6 +35,8 @@ export default function ProfileScreen() {
   );
   const profileText = useRef("");
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [numberOfDays, setNumberOfDays] = useState<number>(0);
+  const [dayJoined, setDayJoined] = useState<string | null>(null);
 
   const colorScheme = useColorScheme();
 
@@ -37,6 +47,12 @@ export default function ProfileScreen() {
       );
       setUserProfile({ ...usersProfile });
       profileText.current = usersProfile.profile;
+      const joinedDate = new Date(usersProfile.time_created);
+      const today = new Date();
+      const dayDiff = daysBetween(joinedDate, today);
+
+      setDayJoined(joinedDate.toDateString());
+      setNumberOfDays(Math.floor(dayDiff));
     })();
   }, []);
 
@@ -45,8 +61,6 @@ export default function ProfileScreen() {
       ...prevState,
       profile: text,
     }));
-    // profileText.current = text;
-    console.log("update ", userProfile);
   };
 
   const updateProfile = useCallback(async () => {
@@ -72,48 +86,203 @@ export default function ProfileScreen() {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View
+        style={[
+          styles.bubble,
+          {
+            top: 0,
+            left: -65,
+            backgroundColor:
+              colorScheme === "light" ? pallatte.colorGrey : pallatte.colorGold,
+          },
+        ]}
+      />
+      <View
+        style={[
+          styles.bubble,
+          {
+            top: -50,
+            left: -15,
+            backgroundColor:
+              colorScheme === "light"
+                ? pallatte.colorGold
+                : pallatte.colorDarkPurple,
+          },
+        ]}
+      />
+      <View
+        style={[
+          styles.bubble,
+          {
+            top: 10,
+            right: -45,
+            backgroundColor:
+              colorScheme === "light"
+                ? pallatte.colorDarkGrey
+                : pallatte.colorDarkGrey,
+          },
+        ]}
+      />
+      <View
+        style={[
+          styles.bubble,
+          {
+            top: -75,
+            right: 50,
+            backgroundColor:
+              colorScheme === "light"
+                ? pallatte.colorDarkPurple
+                : pallatte.colorLightPurple,
+          },
+        ]}
+      />
+      <View
+        style={[
+          styles.bubble,
+          {
+            bottom: -55,
+            left: -10,
+            backgroundColor:
+              colorScheme === "light"
+                ? pallatte.colorLightPurple
+                : pallatte.colorGrey,
+          },
+        ]}
+      />
+      <View
+        style={{
+          backgroundColor: "transparent",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 10,
+        }}
+      >
         <Image
           source={{ uri: "http://placekitten.com/200/300" }}
-          style={{ width: 100, height: 100 }}
+          // defaultSource={}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 100,
+            backgroundColor: pallatte.colorLightGrey,
+          }}
         />
+        <Text style={{ fontWeight: "700", fontSize: 18 }}>
+          {userProfile?.username}
+        </Text>
       </View>
-      <View style={styles.contentContainer}>
-        <View style={styles.contentContainerHeading}>
-          <View>
-            <Text>{userProfile?.username}'s Profile</Text>
-          </View>
-          <View>
-            <Pressable onPress={() => setIsEdit(!isEdit)}>
-              <FontAwesome
-                name="edit"
-                size={25}
-                color={Colors[colorScheme ?? "light"].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          </View>
+      <View
+        style={{
+          marginTop: 50,
+          width: "100%",
+          justifyContent: "space-between",
+          flexDirection: "row",
+        }}
+      >
+        <View style={styles.timeHeader}>
+          <Text style={styles.timeHeadingText}>Member Since</Text>
+          <Text>{dayJoined}</Text>
         </View>
-
-        <ScrollView>
-          {isEdit ? (
-            <>
-              <EditTextContent
-                updateContent={updateProfileContent}
-                content={userProfile?.profile}
-              />
-              <Button onPress={updateProfile} />
-            </>
-          ) : (
-            <>
-              <Text style={{ marginBottom: 10 }}>PROFILE</Text>
-              <Text>{userProfile?.profile}</Text>
-            </>
-          )}
-        </ScrollView>
+        <View style={styles.timeHeader}>
+          <Text style={styles.timeHeadingText}>Last Online</Text>
+          <Text>
+            {numberOfDays === 0 ? "Today" : `${numberOfDays} days ago`}{" "}
+          </Text>
+        </View>
       </View>
 
-      {/* <Text style={styles.title}>Tab Profile</Text> */}
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 0,
+          justifyContent: "flex-start",
+        }}
+      >
+        {isEdit ? (
+          <View
+            style={{
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                flexGrow: 1,
+                width: "100%",
+                alignItems: "flex-end",
+              }}
+            >
+              <Pressable onPress={() => setIsEdit(!isEdit)}>
+                <FontAwesome
+                  name="close"
+                  size={25}
+                  color={Colors[colorScheme ?? "light"].text}
+                />
+              </Pressable>
+            </View>
+
+            <EditTextContent
+              updateContent={updateProfileContent}
+              content={userProfile?.profile}
+            />
+            <Button style={{ maxWidth: "25%" }} onPress={updateProfile} />
+          </View>
+        ) : (
+          <>
+            <View style={styles.contentContainerHeading}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  marginBottom: 10,
+                  fontWeight: "500",
+                }}
+              >
+                About Me
+              </Text>
+              <View>
+                {usersId === userProfile.id && (
+                  <Pressable onPress={() => setIsEdit(!isEdit)}>
+                    <FontAwesome
+                      name="edit"
+                      size={25}
+                      color={Colors[colorScheme ?? "light"].text}
+                    />
+                  </Pressable>
+                )}
+              </View>
+            </View>
+
+            <Text>{userProfile?.profile}</Text>
+          </>
+        )}
+        <View
+          style={[
+            styles.profileItemContainer,
+            {
+              marginTop: 10,
+            },
+          ]}
+        >
+          <Text style={styles.profileItemHeader}>Age:</Text>
+          <Text style={styles.profileItem}>{userProfile?.age}</Text>
+        </View>
+        <View style={styles.profileItemContainer}>
+          <Text style={styles.profileItemHeader}>Location</Text>
+          <Text style={styles.profileItem}>{userProfile?.location}</Text>
+        </View>
+        <View style={styles.profileItemContainer}>
+          <Text style={styles.profileItemHeader}>Native Language</Text>
+          <Text style={styles.profileItem}>{userProfile?.native_language}</Text>
+        </View>
+        <View style={styles.profileItemContainer}>
+          <Text style={styles.profileItemHeader}>Target Language</Text>
+          <Text style={styles.profileItem}>{userProfile?.target_language}</Text>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -123,26 +292,41 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
   },
-  contentContainer: {
-    width: "100%",
-    height: "100%",
+  bubble: {
+    position: "absolute",
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    zIndex: 0,
+  },
+  timeHeader: {
     alignItems: "center",
-    justifyContent: "flex-start",
+    flexDirection: "column",
+  },
+  timeHeadingText: {
+    fontWeight: "700",
   },
   contentContainerHeading: {
-    width: "100%",
-    height: 50,
+    flex: 1,
+    minHeight: 50,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
   },
   separator: {
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  profileItemContainer: {
+    flexDirection: "row",
+  },
+  profileItemHeader: {
+    fontSize: 16,
+    fontWeight: "500",
+    marginRight: 5,
+  },
+  profileItem: {
+    fontSize: 16,
   },
 });

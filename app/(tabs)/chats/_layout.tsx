@@ -1,11 +1,12 @@
-import { Stack } from "expo-router";
+import { Link, Stack } from "expo-router";
 import { Header } from "../../../components/Header";
 import { ChatProvider } from "../../../context/Chats";
 import { useLocalSearchParams } from "expo-router";
 import { useWebSocketContext } from "../../../context/WebSocket";
 import { useEffect, useState } from "react";
 import Colors from "../../../constants/Colors";
-import { useColorScheme } from "react-native";
+import { Pressable, useColorScheme } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function ChatsLayout() {
   const colorScheme = useColorScheme();
@@ -34,11 +35,30 @@ export default function ChatsLayout() {
           tabBarStyle: { backgroundColor: "black" },
         })}
       >
-        <Stack.Screen name="index" options={{ headerTitle: "Chats" }} />
+        <Stack.Screen
+          name="index"
+          options={{
+            title: "Chats",
+            // headerTitle: "Chats"
+            headerRight: () => (
+              <Link href="/newChatModal" asChild>
+                <Pressable>
+                  {({ pressed }) => (
+                    <FontAwesome
+                      name="plus"
+                      size={25}
+                      color={Colors[colorScheme ?? "light"].matchTint}
+                      style={{ opacity: pressed ? 0.5 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              </Link>
+            ),
+          }}
+        />
         <Stack.Screen
           name="[id]"
           options={{ headerTitle: chatName }}
-
           // options={{ headerTitle: (props) => <Header {...props} /> }}
         />
       </Stack>

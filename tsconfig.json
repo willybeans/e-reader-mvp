@@ -4,5 +4,11 @@
     "strict": true,
     "lib": ["ESNext"]
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "additional.d.ts"
+  ]
 }

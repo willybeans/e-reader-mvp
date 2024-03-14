@@ -15,6 +15,8 @@ import EditTextContent from "../../components/EditTextContent";
 import { Button } from "../../components/Button";
 import { daysBetween } from "../../helpers/utils";
 
+import Fox from "../../svgs/fox.svg";
+
 type UserProfile = {
   id: string;
   username: string;
@@ -25,6 +27,7 @@ type UserProfile = {
   target_language: string;
   last_online: string;
   time_created: string;
+  icon?: string;
 };
 
 const usersId = "d2792a62-86a4-4c49-a909-b1e762c683a3";
@@ -157,16 +160,27 @@ export default function ProfileScreen() {
           marginTop: 10,
         }}
       >
-        <Image
-          source={{ uri: "http://placekitten.com/200/300" }}
-          // defaultSource={}
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 100,
-            backgroundColor: pallatte.colorLightGrey,
-          }}
-        />
+        {userProfile?.icon === undefined ? (
+          <View
+            style={{
+              backgroundColor: pallatte.colorLightGrey,
+              borderRadius: 100,
+            }}
+          >
+            <Fox height={100} width={100} />
+          </View>
+        ) : (
+          <Image
+            source={{ uri: "http://placekitten.com/200/300" }}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 100,
+              backgroundColor: pallatte.colorLightGrey,
+            }}
+          />
+        )}
+
         <Text style={{ fontWeight: "700", fontSize: 18 }}>
           {userProfile?.username}
         </Text>

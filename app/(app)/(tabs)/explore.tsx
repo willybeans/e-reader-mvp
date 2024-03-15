@@ -4,13 +4,13 @@ import {
   StyleSheet,
   useColorScheme,
 } from "react-native";
-import { TextInput, View } from "../../components/Themed";
+import { TextInput, View } from "../../../components/Themed";
 import { useEffect, useState } from "react";
-import Colors from "../../constants/Colors";
+import Colors from "../../../constants/Colors";
 
-import { SearchContent } from "../../components/SearchContent";
-import { Button } from "../../components/Button";
-import { api, buildUrl } from "../../helpers/api";
+import { SearchContent } from "../../../components/SearchContent";
+import { Button } from "../../../components/Button";
+import { api, buildUrl } from "../../../helpers/api";
 
 type SearchContent = {
   id: string;

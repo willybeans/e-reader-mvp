@@ -1,12 +1,12 @@
 import { ScrollView, StyleSheet, useColorScheme } from "react-native";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Text, View } from "../../components/Themed";
+import { Text, View } from "../../../components/Themed";
 
-import { ContentIcon } from "../../components/ContentIcon";
-import { Button } from "../../components/Button";
+import { ContentIcon } from "../../../components/ContentIcon";
+import { Button } from "../../../components/Button";
 
-import { api, buildUrl } from "../../helpers/api";
+import { api, buildUrl } from "../../../helpers/api";
 
 export type Content = {
   id: string;

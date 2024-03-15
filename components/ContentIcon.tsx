@@ -8,7 +8,7 @@ import {
 import { Text, View } from "./Themed";
 import Colors, { pallatte } from "../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-import { Content } from "../app/(tabs)";
+import { Content } from "../app/(app)/(tabs)";
 import { Link } from "expo-router";
 
 type CountBannerProps = {

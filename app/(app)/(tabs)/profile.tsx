@@ -6,16 +6,16 @@ import {
   useColorScheme,
 } from "react-native";
 
-import { Text, View } from "../../components/Themed";
+import { Text, View } from "../../../components/Themed";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { api, buildUrl } from "../../helpers/api";
+import { api, buildUrl } from "../../../helpers/api";
 import { FontAwesome } from "@expo/vector-icons";
-import Colors, { pallatte } from "../../constants/Colors";
-import EditTextContent from "../../components/EditTextContent";
-import { Button } from "../../components/Button";
-import { daysBetween } from "../../helpers/utils";
+import Colors, { pallatte } from "../../../constants/Colors";
+import EditTextContent from "../../../components/EditTextContent";
+import { Button } from "../../../components/Button";
+import { daysBetween } from "../../../helpers/utils";
 
-import Fox from "../../svgs/fox.svg";
+import Fox from "../../../svgs/fox.svg";
 
 type UserProfile = {
   id: string;

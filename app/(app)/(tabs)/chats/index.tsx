@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Link, HrefObject } from "expo-router";
 import { ScrollView, Image, StyleSheet, Dimensions } from "react-native";
-import { Text, View } from "../../../components/Themed";
-import { useWebSocketContext } from "../../../context/WebSocket";
-import { pallatte } from "../../../constants/Colors";
+import { Text, View } from "../../../../components/Themed";
+import { useWebSocketContext } from "../../../../context/WebSocket";
+import { pallatte } from "../../../../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 
 type Url = {

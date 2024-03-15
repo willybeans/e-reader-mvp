@@ -3,12 +3,12 @@ import { Image, Platform, StyleSheet, useColorScheme } from "react-native";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 
-import { Text, View, TextInput } from "../components/Themed";
-import { Button } from "../components/Button";
-import { api, buildUrl, ReqBody } from "../helpers/api";
+import { Text, View, TextInput } from "../../components/Themed";
+import { Button } from "../../components/Button";
+import { api, buildUrl, ReqBody } from "../../helpers/api";
 import { router } from "expo-router";
-import { storeData } from "../helpers/localStorage";
-import Colors from "../constants/Colors";
+import { storeData } from "../../helpers/localStorage";
+import Colors from "../../constants/Colors";
 
 type Asset = {
   test?: any;

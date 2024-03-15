@@ -6,10 +6,10 @@ import {
   StyleSheet,
   useColorScheme,
 } from "react-native";
-import { Text, TextInput, View } from "../../../components/Themed";
-import { useWebSocketContext } from "../../../context/WebSocket";
-import { Button } from "../../../components/Button";
-import Colors, { pallatte } from "../../../constants/Colors";
+import { Text, TextInput, View } from "../../../../components/Themed";
+import { useWebSocketContext } from "../../../../context/WebSocket";
+import { Button } from "../../../../components/Button";
+import Colors, { pallatte } from "../../../../constants/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 
 const usersId = "d2792a62-86a4-4c49-a909-b1e762c683a3";

@@ -9,15 +9,15 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigation } from "expo-router";
 import { CommonActions } from "@react-navigation/native";
 
-import { Text, TextInput, View } from "../components/Themed";
-import { Button } from "../components/Button";
-import EditTextContent from "../components/EditTextContent";
-import ReadTextContent from "../components/ReadTextContent";
+import { Text, TextInput, View } from "../../components/Themed";
+import { Button } from "../../components/Button";
+import EditTextContent from "../../components/EditTextContent";
+import ReadTextContent from "../../components/ReadTextContent";
 
-import { getDataString } from "../helpers/localStorage";
-import { api, buildUrl } from "../helpers/api";
-import Colors from "../constants/Colors";
-import { PickerComponent } from "../components/PickerComponent";
+import { getDataString } from "../../helpers/localStorage";
+import { api, buildUrl } from "../../helpers/api";
+import Colors from "../../constants/Colors";
+import { PickerComponent } from "../../components/PickerComponent";
 
 type Genre =
   | "drama"

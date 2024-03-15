@@ -1,10 +1,10 @@
 import { Link, Stack } from "expo-router";
-import { Header } from "../../../components/Header";
-import { ChatProvider } from "../../../context/Chats";
+import { Header } from "../../../../components/Header";
+import { ChatProvider } from "../../../../context/Chats";
 import { useLocalSearchParams } from "expo-router";
-import { useWebSocketContext } from "../../../context/WebSocket";
+import { useWebSocketContext } from "../../../../context/WebSocket";
 import { useEffect, useState } from "react";
-import Colors from "../../../constants/Colors";
+import Colors from "../../../../constants/Colors";
 import { Pressable, useColorScheme } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 

@@ -2,7 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs, usePathname } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 
-import Colors, { pallatte } from "../../constants/Colors";
+import Colors, { pallatte } from "../../../constants/Colors";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -46,7 +46,8 @@ export default function TabLayout() {
         headerStyle: {
           backgroundColor: Colors[colorScheme ?? "light"].background,
         },
-        // headerTitleAlign: "center",
+        // headerShown: false,
+        headerTitleAlign: "center",
         // tabBarActiveTintColor: purple.purple8,
         // tabBarInactiveTintColor: grayDark.gray11,
         tabBarStyle: {
@@ -95,6 +96,20 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
+          headerRight: () => (
+            <Link href="/sign-out" asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="gear"
+                    size={25}
+                    color={Colors[colorScheme ?? "light"].border}
+                    style={{ marginRight: 16, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ),
         }}
       />
     </Tabs>

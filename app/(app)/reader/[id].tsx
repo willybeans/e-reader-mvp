@@ -1,10 +1,10 @@
 import { Platform, ScrollView, StyleSheet } from "react-native";
 
-import { Text, View } from "../../components/Themed";
+import { Text, View } from "../../../components/Themed";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import ReadTextContent from "../../components/ReadTextContent";
-import { api, buildUrl } from "../../helpers/api";
+import ReadTextContent from "../../../components/ReadTextContent";
+import { api, buildUrl } from "../../../helpers/api";
 
 //make global types
 type NewContent = {

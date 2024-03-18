@@ -10,7 +10,7 @@ export const pallatte = {
   colorGrey: "#B4B4B4",
   colorLightGrey: "#CCCCCC",
   colorDarkPurple: "#7C2EDB",
-  colorLightPurple: "#EFE8F7", // "#EFE8F7", // "#E2D1F0",
+  colorLightPurple: "#E3C0FF", // "#D5A2FF", // "#E2D1F0", // "#EFE8F7", // "#EFE8F7", // "#E2D1F0",
   transparent: "rgba(52, 52, 52, alpha)",
   colorGold: "#FFC145", // "#C7AC16", // "#FFD700"
 };

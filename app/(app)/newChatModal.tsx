@@ -8,12 +8,12 @@ import {
 } from "react-native";
 import { useState } from "react";
 
-import { Text, TextInput, View } from "../components/Themed";
-import { Button } from "../components/Button";
-import { UsersSearchComponent } from "../components/UsersSearchComponent";
+import { Text, TextInput, View } from "../../components/Themed";
+import { Button } from "../../components/Button";
+import { UsersSearchComponent } from "../../components/UsersSearchComponent";
 
-import Colors from "../constants/Colors";
-import { api, buildUrl } from "../helpers/api";
+import Colors from "../../constants/Colors";
+import { api, buildUrl } from "../../helpers/api";
 
 type UserProfile = {
   id: string;

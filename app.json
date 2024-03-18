@@ -4,22 +4,37 @@
     "slug": "freedo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/test-png-fox.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./assets/images/test-png-med-fox.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#E3C0FF",
+        "dark": {
+          "image": "./assets/images/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#7C2EDB"
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "splash": {
+        "image": "./assets/images/test-png-med-fox.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#E3C0FF",
+        "dark": {
+          "image": "./assets/images/test-png-med-fox.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#7C2EDB"
+        }
       }
     },
     "web": {

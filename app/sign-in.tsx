@@ -8,8 +8,7 @@ import { useState } from "react";
 import Colors from "../constants/Colors";
 import { Button } from "../components/Button";
 
-// import SeekingFox from "../svgs/seeking_fox.svg";
-import CuriousFox from "../svgs/curious_fox_min.svg";
+import CuriousFox from "../svgs/curious_fox.svg";
 
 type Url = {
   pathname: string;

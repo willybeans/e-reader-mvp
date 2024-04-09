@@ -69,7 +69,7 @@ export default function TabLayout() {
                   <FontAwesome
                     name="plus"
                     size={25}
-                    color={Colors[colorScheme ?? "light"].matchTint}
+                    color={pallatte.colorDarkPurple}
                     style={{ marginRight: 16, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "freedo",
-    "slug": "freedo",
+    "name": "freedu",
+    "slug": "freedu",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/test-png-fox.png",
-    "scheme": "myapp",
+    "scheme": "com.willybeans.freedu",
     "userInterfaceStyle": "automatic",
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -15,15 +15,26 @@
         "resizeMode": "contain",
         "backgroundColor": "#E3C0FF",
         "dark": {
-          "image": "./assets/images/splash.png",
+          "image": "./assets/images/test-png-med-fox.png",
           "resizeMode": "contain",
           "backgroundColor": "#7C2EDB"
         }
-      }
+      },
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.877799132108-3kvno9kifo9nh6mtl398btl2ljespudr",
+              "com.googleusercontent.apps.877799132108-s1l5qr0koi0ddqt075130fjhnk5boevh"
+            ]
+          }
+        ]
+      },
+      "bundleIdentifier": "com.willybeans.freedu"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/test-png-fox.png",
         "backgroundColor": "#ffffff"
       },
       "splash": {
@@ -35,7 +46,9 @@
           "resizeMode": "contain",
           "backgroundColor": "#7C2EDB"
         }
-      }
+      },
+      "permissions": ["android.permission.RECORD_AUDIO"],
+      "package": "com.willybeans.freedu"
     },
     "web": {
       "bundler": "metro",
@@ -49,10 +62,19 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ],
-      "expo-router"
+      "expo-router",
+      "@react-native-google-signin/google-signin"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "6c5a3f1a-6d04-4c28-870a-1af1f9d13db5"
+      }
     }
   }
 }

@@ -2,13 +2,15 @@ import { HrefObject, Link, router } from "expo-router";
 // import { Text, View } from "react-native";
 import { useSession } from "../context/Auth/ctx";
 import { Text, TextInput, View } from "../components/Themed";
-import GithubLoginComponent from "../components/GithubLogin";
-import { StyleSheet, useColorScheme } from "react-native";
+// import GithubLoginComponent from "../components/GithubLogin";
+import { ScrollView, StyleSheet, useColorScheme } from "react-native";
 import { useState } from "react";
 import Colors from "../constants/Colors";
 import { Button } from "../components/Button";
 
 import CuriousFox from "../svgs/curious_fox.svg";
+import GoogleLogin from "../components/GoogleLogin";
+import GithubLoginComponent from "../components/GithubLogin";
 
 type Url = {
   pathname: string;
@@ -35,7 +37,7 @@ export default function SignIn() {
     router.replace("/");
   };
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <CuriousFox
         height={250}
         width={250}
@@ -80,14 +82,16 @@ export default function SignIn() {
           style={{ width: "50%" }}
         />
       </View>
+      
 
       <View
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
         style={styles.separator}
       />
-      <GithubLoginComponent />
-    </View>
+      <GoogleLogin />
+      {/* <GithubLoginComponent /> */}
+    </ScrollView>
   );
 }
 

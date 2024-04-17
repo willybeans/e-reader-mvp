@@ -4,7 +4,7 @@ import { ChatProvider } from "../../../../context/Chats";
 import { useLocalSearchParams } from "expo-router";
 import { useWebSocketContext } from "../../../../context/WebSocket";
 import { useEffect, useState } from "react";
-import Colors from "../../../../constants/Colors";
+import Colors, { pallatte } from "../../../../constants/Colors";
 import { Pressable, useColorScheme } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -47,7 +47,7 @@ export default function ChatsLayout() {
                     <FontAwesome
                       name="plus"
                       size={25}
-                      color={Colors[colorScheme ?? "light"].matchTint}
+                      color={pallatte.colorDarkPurple}
                       style={{ opacity: pressed ? 0.5 : 1 }}
                     />
                   )}

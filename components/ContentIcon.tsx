@@ -23,7 +23,7 @@ export function ContentIcon(props: CountBannerProps) {
     <View style={styles.container}>
       <Link
         href={{
-          pathname: `/reader/${props?.content?.id}`,
+          pathname: `/epub-reader/${props?.content?.id}`, // add "type" to content -> type: "epub" | "text"
           // params: { id: props?.content?.id as string },
         }}
         asChild

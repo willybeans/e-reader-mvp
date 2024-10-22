@@ -1,7 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, Platform, StyleSheet, useColorScheme } from "react-native";
+import {
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  useColorScheme,
+} from "react-native";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import * as DocumentPicker from "expo-document-picker";
 
 import { Text, View, TextInput } from "../../components/Themed";
 import { Button } from "../../components/Button";
@@ -72,6 +79,13 @@ export default function UploadScreen() {
   `);
   };
 
+  const onDocumentPicker = async () => {
+    const result = await DocumentPicker.getDocumentAsync();
+    if (!result.canceled) {
+      console.log("result", result);
+    }
+  };
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -103,7 +117,7 @@ export default function UploadScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Text From Website</Text>
       <Text style={styles.textInstructions}>
         Please insert a valid url of a website
@@ -194,12 +208,24 @@ export default function UploadScreen() {
         style={{ maxWidth: "50%" }}
         onPress={onContinue}
       />
-    </View>
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+      <Text style={styles.title}>Upload an EPub File</Text>
+      <Button
+        title="Upload EPub"
+        style={{ maxWidth: "50%" }}
+        onPress={onDocumentPicker}
+      />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    // not used anymore because of scroll view swap
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
